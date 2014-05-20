@@ -34,6 +34,8 @@ use org\bovigo\vfs\vfsStream;
  */
 class ModelTest extends PHPUnit_Framework_TestCase
 {
+    private $_subject;
+
     private $_templateFolder;
 
     /**
@@ -55,6 +57,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
             touch($this->_templateFolder . $template . '/template.htm');
         }
         $pth = array('folder' => array('templates' => $this->_templateFolder));
+        $this->_subject = new Themeswitcher_Model();
     }
 
     /**
@@ -64,10 +67,9 @@ class ModelTest extends PHPUnit_Framework_TestCase
      */
     public function testTemplates()
     {
-        $subject = new Themeswitcher_Model();
         $this->assertEquals(
             array('one', 'three', 'two'),
-            $subject->getTemplates()
+            $this->_subject->getTemplates()
         );
     }
 
@@ -82,8 +84,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
     {
         global $pth;
 
-        $subject = new Themeswitcher_Model();
-        $subject->switchTemplate('two');
+        $this->_subject->switchTemplate('two');
         $this->assertEquals(
             array(
                 'folder' => array(

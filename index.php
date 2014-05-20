@@ -22,4 +22,31 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
     exit;
 }
 
+require_once $pth['folder']['plugin_classes'] . 'Model.php';
+require_once $pth['folder']['plugin_classes'] . 'Presentation.php';
+
+/**
+ * Renders the theme selection.
+ *
+ * @return string (X)HTML.
+ *
+ * @global Themeswitcher_Controller The controller.
+ */
+function Themeswitcher_selection()
+{
+    global $_Themeswitcher_controller;
+
+    return $_Themeswitcher_controller->renderThemeSelection();
+}
+
+/**
+ * The controller.
+ *
+ * @var Themeswitcher_Controller
+ */
+$_Themeswitcher_controller = new Themeswitcher_Controller(
+    new Themeswitcher_CommandFactory()
+);
+$_Themeswitcher_controller->dispatch();
+
 ?>

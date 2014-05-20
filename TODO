@@ -1,0 +1,1 @@
+* don't switch template if it is not available (clear cookie in this case?)
