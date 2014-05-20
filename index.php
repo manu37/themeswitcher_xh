@@ -22,8 +22,20 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
     exit;
 }
 
-require_once $pth['folder']['plugin_classes'] . 'Model.php';
+/**
+ * The domain layer.
+ */
+require_once $pth['folder']['plugin_classes'] . 'Domain.php';
+
+/**
+ * The presentation layer.
+ */
 require_once $pth['folder']['plugin_classes'] . 'Presentation.php';
+
+/**
+ * The plugin version.
+ */
+define('THEMESWITCHER_VERSION', '@THEMESWITCHER_VERSION@');
 
 /**
  * Renders the theme selection.

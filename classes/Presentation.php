@@ -56,6 +56,46 @@ class Themeswitcher_Controller
         ) {
             $this->_commandFactory->makeSelectThemeCommand()->execute();
         }
+        if ($this->_isPluginAdministration()) {
+            $this->_handleAdministration();
+        }
+    }
+
+    /**
+     * Whether the plugin administration is requested.
+     *
+     * @return bool
+     *
+     * @global string Whether the plugin is requested.
+     */
+    private function _isPluginAdministration()
+    {
+        global $themeswitcher;
+
+        return XH_ADM && isset($themeswitcher) && $themeswitcher == 'true';
+    }
+
+    /**
+     * Handles the plugin administration.
+     *
+     * @return void
+     *
+     * @global string The value of the <var>admin</var> GP parameter.
+     * @global string The value of the <var>action</var> GP parameter.
+     * @global string The output for the content area.
+     */
+    private function _handleAdministration()
+    {
+        global $admin, $action, $o;
+
+        $o .= print_plugin_admin('off');
+        switch ($admin) {
+        case '':
+            $o .= $this->_commandFactory->makeInfoCommand()->render();
+            break;
+        default:
+            $o .= plugin_admin_common($admin, $action, 'themeswitcher');
+        }
     }
 
     /**
@@ -102,6 +142,16 @@ class Themeswitcher_CommandFactory
         return new Themeswitcher_SelectThemeCommand(
             new Themeswitcher_Model()
         );
+    }
+
+    /**
+     * Makes an info command.
+     *
+     * @return Themeswitcher_InfoCommand
+     */
+    public function makeInfoCommand()
+    {
+        return new Themeswitcher_InfoCommand();
     }
 }
 
@@ -308,6 +358,63 @@ class Themeswitcher_SelectThemeCommand
                 0, CMSIMPLE_ROOT
             );
         }
+    }
+}
+
+/**
+ * The info command.
+ *
+ * @category CMSimple_XH
+ * @package  Themeswitcher
+ * @author   Christoph M. Becker <cmbecker69@gmx.de>
+ * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
+ * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ */
+class Themeswitcher_InfoCommand
+{
+    /**
+     * Renders the view.
+     *
+     * @return string (X)HTML.
+     */
+    public function render()
+    {
+        return '<h1>Themeswitcher &ndash; Info</h1>'
+            . '<p>Version: ' . THEMESWITCHER_VERSION . '</p>'
+            . $this->_renderCopyright() . $this->_renderLicense();
+    }
+
+    /**
+     * Renders the copyright.
+     *
+     * @return string (X)HTML.
+     */
+    private function _renderCopyright()
+    {
+        return '<p>Copyright &copy; 2014 <a href="http://3-magi.net/">'
+            . 'Christoph M. Becker</a></p>';
+    }
+
+    /**
+     * Renders the license.
+     *
+     * @return string (X)HTML.
+     */
+    private function _renderLicense()
+    {
+        return <<<EOT
+<p class="themeswitcher_license">This program is free software: you can
+redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.</p>
+<p class="themeswitcher_license">This program is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHAN&shy;TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.</p>
+<p class="themeswitcher_license">You should have received a copy of the GNU
+General Public License along with this program. If not, see <a
+href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+EOT;
     }
 }
 

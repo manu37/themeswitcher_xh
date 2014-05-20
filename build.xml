@@ -68,7 +68,7 @@
 
     <target name="php-doc">
         <phpdoc title="Themeswitcher_XH Developer Documentation" destdir="doc/php"
-                output="HTML:frames:default" defaultpackagename="Themeswitcher"
+                output="HTML:Smarty:HandS" defaultpackagename="Themeswitcher"
                 defaultcategoryname="CMSimple_XH">
             <fileset refid="php-sources"/>
             <projdocfileset dir=".">

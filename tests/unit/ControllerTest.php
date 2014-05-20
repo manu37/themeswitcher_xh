@@ -14,6 +14,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+require_once './vendor/autoload.php';
+require_once '../../cmsimple/adminfuncs.php';
 require_once './classes/Presentation.php';
 
 /**
@@ -42,12 +44,31 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     private $_themeSelectionCommand;
 
     /**
+     * The info command.
+     *
+     * @var Themeswitcher_InfoCommand
+     */
+    private $_infoCommand;
+
+    /**
+     * The print_plugin_admin() mock.
+     *
+     * @var PHPUnit_Extensions_MockFunction
+     */
+    private $_printPluginAdmin;
+
+    /**
      * Sets up the test fixture.
      *
      * @return void
      */
     public function setUp()
     {
+        if (!defined('XH_ADM')) {
+            define('XH_ADM', true);
+        } else {
+            runkit_constant_redefine('XH_ADM', true);
+        }
         $commandFactory = $this->getMock('Themeswitcher_CommandFactory');
         $this->_themeSelectionCommand = $this
             ->getMockBuilder('Themeswitcher_ThemeSelectionCommand')
@@ -63,7 +84,14 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $commandFactory->expects($this->any())
             ->method('makeSelectThemeCommand')
             ->will($this->returnValue($this->_selectThemeCommand));
+        $this->_infoCommand = $this->getMockBuilder('Themeswitcher_InfoCommand')
+            ->disableOriginalConstructor()->getMock();
+        $commandFactory->expects($this->any())->method('makeInfoCommand')
+            ->will($this->returnValue($this->_infoCommand));
         $this->_subject = new Themeswitcher_Controller($commandFactory);
+        $this->_printPluginAdmin = new PHPUnit_Extensions_MockFunction(
+            'print_plugin_admin', $this->_subject
+        );
     }
 
     /**
@@ -87,6 +115,51 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     {
         $_COOKIE = array('themeswitcher_theme' => 'foo');
         $this->_selectThemeCommand->expects($this->once())->method('execute');
+        $this->_subject->dispatch();
+    }
+
+    /**
+     * Tests that the info command is rendered.
+     *
+     * @return void
+     *
+     * @global string Whether the plugin is requested.
+     * @global string The value of <var>admin</var> GP paramter.
+     */
+    public function testRendersInfoCommand()
+    {
+        global $themeswitcher, $admin;
+
+        $themeswitcher = 'true';
+        $admin = '';
+        $this->_printPluginAdmin->expects($this->once());
+        $this->_infoCommand->expects($this->once())->method('render');
+        $this->_subject->dispatch();
+    }
+
+    /**
+     * Tests that plugin_admin_common() is called.
+     *
+     * @return void
+     *
+     * @global string Whether the plugin is requested.
+     * @global string The value of the <var>admin</var> GP paramter.
+     * @global string The value of the <var>action</var> GP parameter.
+     */
+    public function testPluginAdminCommon()
+    {
+        global $themeswitcher, $admin, $action;
+
+        $themeswitcher = 'true';
+        $admin = 'plugin_config';
+        $action = 'plugin_edit';
+        $this->_printPluginAdmin->expects($this->once());
+        $pluginAdminCommon = new PHPUnit_Extensions_MockFunction(
+            'plugin_admin_common', $this->_subject
+        );
+        $pluginAdminCommon->expects($this->once())->with(
+            $admin, $action, 'themeswitcher'
+        );
         $this->_subject->dispatch();
     }
 
