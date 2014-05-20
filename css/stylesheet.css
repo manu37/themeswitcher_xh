@@ -1,0 +1,13 @@
+/*
+ * Theme selection.
+ */
+.themeswitcher_select_form {}
+.themeswitcher_select_form select {}
+.themeswitcher_select_form button {}
+
+/*
+ * Plugin administration.
+ */
+.themeswitcher_license {
+    text-align: justify;
+}
