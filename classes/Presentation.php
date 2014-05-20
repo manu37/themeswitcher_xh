@@ -192,8 +192,8 @@ class Themeswitcher_ThemeSelectionCommand
     private function _renderSelect()
     {
         $result = '<select name="themeswitcher_select">';
-        foreach ($this->_model->getTemplates() as $template) {
-            $result .= $this->_renderOption($template);
+        foreach ($this->_model->getThemes() as $theme) {
+            $result .= $this->_renderOption($theme);
         }
         $result .= '</select>';
         return $result;
@@ -202,14 +202,14 @@ class Themeswitcher_ThemeSelectionCommand
     /**
      * Renders an option element.
      *
-     * @param string $template A template name.
+     * @param string $theme A theme name.
      *
      * @return string (X)HTML.
      */
-    private function _renderOption($template)
+    private function _renderOption($theme)
     {
-        $template = XH_hsc($template);
-        return tag('option label="' . $template . '" value="' . $template . '"');
+        $theme = XH_hsc($theme);
+        return tag('option label="' . $theme . '" value="' . $theme . '"');
     }
 
     /**
@@ -265,14 +265,48 @@ class Themeswitcher_SelectThemeCommand
      */
     public function execute()
     {
-        if (isset($_GET['themeswitcher_select'])) {
-            $template = stsl($_GET['themeswitcher_select']);
-        } else {
-            $template = stsl($_COOKIE['themeswitcher_theme']);
+        if ($this->_isUserThemeAllowed()) {
+            $this->_model->switchTheme($this->_getUserTheme());
+            $this->_setThemeCookie();
         }
-        $this->_model->switchTemplate($template);
+    }
+
+    /**
+     * Returns the theme selected by the user.
+     *
+     * @return string
+     */
+    private function _getUserTheme()
+    {
         if (isset($_GET['themeswitcher_select'])) {
-            setcookie('themeswitcher_theme', $template, 0, CMSIMPLE_ROOT);
+            return stsl($_GET['themeswitcher_select']);
+        } else {
+            return stsl($_COOKIE['themeswitcher_theme']);
+        }
+    }
+
+    /**
+     * Returns whether the user selected theme is allowed.
+     *
+     * @return bool
+     */
+    private function _isUserThemeAllowed()
+    {
+        return in_array($this->_getUserTheme(), $this->_model->getThemes());
+    }
+
+    /**
+     * Sets the theme cookie if necessary.
+     *
+     * @return void
+     */
+    private function _setThemeCookie()
+    {
+        if (isset($_GET['themeswitcher_select'])) {
+            setcookie(
+                'themeswitcher_theme', $this->_getUserTheme(),
+                0, CMSIMPLE_ROOT
+            );
         }
     }
 }

@@ -1,1 +1,3 @@
-* don't switch template if it is not available (clear cookie in this case?)
+* direct form submission on selection change (JS enhancement)
+* page template overrides user selection
+* template switch in back-end

@@ -50,7 +50,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             'label_activate' => 'Activate Theme'
         );
         $model = $this->getMock('Themeswitcher_Model');
-        $model->expects($this->any())->method('getTemplates')->will(
+        $model->expects($this->any())->method('getThemes')->will(
             $this->returnValue(array('one', 'three', 'two'))
         );
         $this->_subject = new Themeswitcher_ThemeSelectionCommand($model);

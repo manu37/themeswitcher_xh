@@ -26,27 +26,27 @@
 class Themeswitcher_Model
 {
     /**
-     * Returns all installed templates.
+     * Returns all installed themes.
      *
      * @return array
      */
-    public function getTemplates()
+    public function getThemes()
     {
         return array_values(XH_templates());
     }
 
     /**
-     * Switches to a certain template.
+     * Switches to a certain theme.
      *
-     * @param string $template A template name.
+     * @param string $theme A theme name.
      *
      * @return void
      */
-    public function switchTemplate($template)
+    public function switchTheme($theme)
     {
         global $pth;
 
-        $pth['folder']['template'] = $pth['folder']['templates'] . $template . '/';
+        $pth['folder']['template'] = $pth['folder']['templates'] . $theme . '/';
         $pth['file']['template'] = $pth['folder']['template'] . 'template.htm';
         $pth['file']['stylesheet'] = $pth['folder']['template'] . 'stylesheet.css';
         $pth['folder']['menubuttons'] = $pth['folder']['template'] . 'menu/';

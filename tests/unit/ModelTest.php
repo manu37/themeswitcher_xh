@@ -36,7 +36,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
 {
     private $_subject;
 
-    private $_templateFolder;
+    private $_themeFolder;
 
     /**
      * Sets up the test fixture.
@@ -51,51 +51,51 @@ class ModelTest extends PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('templates'));
-        $this->_templateFolder = vfsStream::url('templates/');
-        foreach (array('one', 'two', 'three') as $template) {
-            mkdir($this->_templateFolder . $template, 0777, true);
-            touch($this->_templateFolder . $template . '/template.htm');
+        $this->_themeFolder = vfsStream::url('templates/');
+        foreach (array('one', 'two', 'three') as $theme) {
+            mkdir($this->_themeFolder . $theme, 0777, true);
+            touch($this->_themeFolder . $theme . '/template.htm');
         }
-        $pth = array('folder' => array('templates' => $this->_templateFolder));
+        $pth = array('folder' => array('templates' => $this->_themeFolder));
         $this->_subject = new Themeswitcher_Model();
     }
 
     /**
-     * Tests that expected templates are returned.
+     * Tests that expected themes are returned.
      *
      * @return void
      */
-    public function testTemplates()
+    public function testGetThemes()
     {
         $this->assertEquals(
             array('one', 'three', 'two'),
-            $this->_subject->getTemplates()
+            $this->_subject->getThemes()
         );
     }
 
     /**
-     * Tests that switch template switches the template.
+     * Tests that switch theme switches the theme.
      *
      * @return void
      *
      * @global array The paths of system files and folders.
      */
-    public function testSwitchTemplate()
+    public function testSwitchTheme()
     {
         global $pth;
 
-        $this->_subject->switchTemplate('two');
+        $this->_subject->switchTheme('two');
         $this->assertEquals(
             array(
                 'folder' => array(
-                    'templates' => $this->_templateFolder,
-                    'template' => $this->_templateFolder . 'two/',
-                    'menubuttons' => $this->_templateFolder . 'two/menu/',
-                    'templateimages' => $this->_templateFolder . 'two/images/'
+                    'templates' => $this->_themeFolder,
+                    'template' => $this->_themeFolder . 'two/',
+                    'menubuttons' => $this->_themeFolder . 'two/menu/',
+                    'templateimages' => $this->_themeFolder . 'two/images/'
                 ),
                 'file' => array(
-                    'template' => $this->_templateFolder . 'two/template.htm',
-                    'stylesheet' => $this->_templateFolder . 'two/stylesheet.css'
+                    'template' => $this->_themeFolder . 'two/template.htm',
+                    'stylesheet' => $this->_themeFolder . 'two/stylesheet.css'
                 )
             ),
             $pth
