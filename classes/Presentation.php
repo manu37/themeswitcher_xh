@@ -315,10 +315,50 @@ class Themeswitcher_SelectThemeCommand
      */
     public function execute()
     {
-        if ($this->_isUserThemeAllowed()) {
+        if ($this->_isUserThemeAllowed()
+            && (!$this->_hasPageTheme() || !$this->_isPageThemePreferred())
+        ) {
             $this->_model->switchTheme($this->_getUserTheme());
             $this->_setThemeCookie();
         }
+    }
+
+    /**
+     * Returns whether the user selected theme is allowed.
+     *
+     * @return bool
+     */
+    private function _isUserThemeAllowed()
+    {
+        return in_array($this->_getUserTheme(), $this->_model->getThemes());
+    }
+
+    /**
+     * Returns hether the selected page has an individual theme.
+     *
+     * @return bool
+     *
+     * @global array The page data of the selected page.
+     */
+    private function _hasPageTheme()
+    {
+        global $pd_current;
+
+        return $pd_current['template'] != '';
+    }
+
+    /**
+     * Returns whether individual page themes are preferred.
+     *
+     * @return bool
+     *
+     * @global array The configuration of the plugins.
+     */
+    private function _isPageThemePreferred()
+    {
+        global $plugin_cf;
+
+        return (bool) $plugin_cf['themeswitcher']['prefer_page_theme'];
     }
 
     /**
@@ -333,16 +373,6 @@ class Themeswitcher_SelectThemeCommand
         } else {
             return stsl($_COOKIE['themeswitcher_theme']);
         }
-    }
-
-    /**
-     * Returns whether the user selected theme is allowed.
-     *
-     * @return bool
-     */
-    private function _isUserThemeAllowed()
-    {
-        return in_array($this->_getUserTheme(), $this->_model->getThemes());
     }
 
     /**

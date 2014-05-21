@@ -109,6 +109,44 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests that the theme is switched if page themes are not preferred.
+     *
+     * @return void
+     *
+     * @global array The page data of the selected page.
+     * @global array The configuration of the plugins.
+     */
+    public function testSwitchThemeIfPageThemeIsNotPreferred()
+    {
+        global $pd_current, $plugin_cf;
+
+        $pd_current = array('template' => 'two');
+        $plugin_cf = array('themeswitcher' => array('prefer_page_theme' => ''));
+        $_GET = array('themeswitcher_select' => 'one');
+        $this->_model->expects($this->once())->method('switchTheme');
+        $this->_subject->execute();
+    }
+
+    /**
+     * Tests that the theme is not switched if page themes are preferred.
+     *
+     * @return void
+     *
+     * @global array The page data of the selected page.
+     * @global array The configuration of the plugins.
+     */
+    public function testDontSwitchThemeIfPageTemplateIsPreferred()
+    {
+        global $pd_current, $plugin_cf;
+
+        $pd_current = array('template' => 'two');
+        $plugin_cf = array('themeswitcher' => array('prefer_page_theme' => 'true'));
+        $_GET = array('themeswitcher_select' => 'one');
+        $this->_model->expects($this->never())->method('switchTheme');
+        $this->_subject->execute();
+    }
+
+    /**
      * Tests that the cookie is set on the appropriate GET request.
      *
      * @return void

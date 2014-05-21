@@ -91,6 +91,11 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
         $this->_assertRenders($matcher);
     }
 
+    /**
+     * Renders the license.
+     *
+     * @return string (X)HTML.
+     */
     public function testRendersLicense()
     {
         $matcher = array(
