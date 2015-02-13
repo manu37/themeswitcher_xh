@@ -157,7 +157,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             'plugin_admin_common', $this->subject
         );
         $pluginAdminCommon->expects($this->once())->with(
-            $admin, $action, 'themeswitcher'
+            $action, $admin, 'themeswitcher'
         );
         $this->subject->dispatch();
     }
