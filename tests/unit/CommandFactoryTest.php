@@ -13,8 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
-require_once './classes/Domain.php';
-require_once './classes/Presentation.php';
+require_once './classes/Model.php';
+require_once './classes/CommandFactory.php';
 
 /**
  * Testing the command factory.

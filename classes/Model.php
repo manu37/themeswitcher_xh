@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The domain layer.
+ * The themeswitcher model.
  *
  * PHP version 5
  *
