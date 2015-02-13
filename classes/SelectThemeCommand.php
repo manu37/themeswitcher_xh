@@ -29,7 +29,7 @@ class Themeswitcher_SelectThemeCommand
      *
      * @var Themeswitcher_Model
      */
-    private $_model;
+    protected $model;
 
     /**
      * Initializes a new instance.
@@ -40,7 +40,7 @@ class Themeswitcher_SelectThemeCommand
      */
     public function __construct(Themeswitcher_Model $model)
     {
-        $this->_model = $model;
+        $this->model = $model;
     }
 
     /**
@@ -53,7 +53,7 @@ class Themeswitcher_SelectThemeCommand
         if ($this->isUserThemeAllowed()
             && (!$this->hasPageTheme() || !$this->isPageThemePreferred())
         ) {
-            $this->_model->switchTheme($this->getUserTheme());
+            $this->model->switchTheme($this->getUserTheme());
             $this->setThemeCookie();
         }
     }
@@ -65,7 +65,7 @@ class Themeswitcher_SelectThemeCommand
      */
     protected function isUserThemeAllowed()
     {
-        return in_array($this->getUserTheme(), $this->_model->getThemes());
+        return in_array($this->getUserTheme(), $this->model->getThemes());
     }
 
     /**

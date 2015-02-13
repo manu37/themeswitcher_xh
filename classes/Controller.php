@@ -29,7 +29,7 @@ class Themeswitcher_Controller
      *
      * @var Themeswitcher_CommandFactory.
      */
-    private $_commandFactory;
+    protected $commandFactory;
 
     /**
      * Initializes a new instance.
@@ -40,7 +40,7 @@ class Themeswitcher_Controller
      */
     public function __construct(Themeswitcher_CommandFactory $commandFactory)
     {
-        $this->_commandFactory = $commandFactory;
+        $this->commandFactory = $commandFactory;
     }
 
     /**
@@ -53,7 +53,7 @@ class Themeswitcher_Controller
         if (isset($_GET['themeswitcher_select'])
             || isset($_COOKIE['themeswitcher_theme'])
         ) {
-            $this->_commandFactory->makeSelectThemeCommand()->execute();
+            $this->commandFactory->makeSelectThemeCommand()->execute();
         }
         if ($this->isPluginAdministration()) {
             $this->handleAdministration();
@@ -90,7 +90,7 @@ class Themeswitcher_Controller
         $o .= print_plugin_admin('off');
         switch ($admin) {
         case '':
-            $o .= $this->_commandFactory->makeInfoCommand()->render();
+            $o .= $this->commandFactory->makeInfoCommand()->render();
             break;
         default:
             $o .= plugin_admin_common($admin, $action, 'themeswitcher');
@@ -104,7 +104,7 @@ class Themeswitcher_Controller
      */
     public function renderThemeSelection()
     {
-        return $this->_commandFactory->makeThemeSelectionCommand()->render();
+        return $this->commandFactory->makeThemeSelectionCommand()->render();
     }
 }
 

@@ -32,7 +32,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
      *
      * @var Themeswitcher_CommandFactory
      */
-    private $_subject;
+    protected $subject;
 
     /**
      * Sets up the test fixtures.
@@ -41,7 +41,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_subject = new Themeswitcher_CommandFactory();
+        $this->subject = new Themeswitcher_CommandFactory();
     }
 
     /**
@@ -53,7 +53,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Themeswitcher_ThemeSelectionCommand',
-            $this->_subject->makeThemeSelectionCommand()
+            $this->subject->makeThemeSelectionCommand()
         );
     }
 
@@ -66,7 +66,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Themeswitcher_SelectThemeCommand',
-            $this->_subject->makeSelectThemeCommand()
+            $this->subject->makeSelectThemeCommand()
         );
     }
 
@@ -79,7 +79,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Themeswitcher_InfoCommand',
-            $this->_subject->makeInfoCommand()
+            $this->subject->makeInfoCommand()
         );
     }
 }

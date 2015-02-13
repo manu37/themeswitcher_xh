@@ -28,7 +28,12 @@ require_once './classes/ThemeSelectionCommand.php';
  */
 class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
 {
-    private $_subject;
+    /**
+     * The test subject.
+     *
+     * @var Themeswitcher_ThemeSelectionCommand
+     */
+    protected $subject;
 
     /**
      * Sets up the test fixture.
@@ -52,7 +57,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
         $model->expects($this->any())->method('getThemes')->will(
             $this->returnValue(array('one', 'three', 'two'))
         );
-        $this->_subject = new Themeswitcher_ThemeSelectionCommand($model);
+        $this->subject = new Themeswitcher_ThemeSelectionCommand($model);
     }
 
     /**
@@ -74,7 +79,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
                 'action' => $sn
             )
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -97,7 +102,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             ),
             'ancestor' => array('tag' => 'form')
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -118,7 +123,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             ),
             'ancestor' => array('tag' => 'form')
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -136,7 +141,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             ),
             'parent' => array('tag' => 'select')
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -155,7 +160,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             'content' => $plugin_tx['themeswitcher']['label_activate'],
             'ancestor' => array('tag' => 'form')
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -165,9 +170,9 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    private function _assertRenders($matcher)
+    protected function assertRenders($matcher)
     {
-        @$this->assertTag($matcher, $this->_subject->render());
+        @$this->assertTag($matcher, $this->subject->render());
     }
 }
 

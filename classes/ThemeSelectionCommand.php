@@ -29,21 +29,21 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @var Themeswitcher_Model
      */
-    private $_model;
+    protected $model;
 
     /**
      * The script name
      *
      * @var string
      */
-    private $_scriptName;
+    protected $scriptName;
 
     /**
      * The selected URL.
      *
      * @var string
      */
-    private $_selectedUrl;
+    protected $selectedUrl;
 
     /**
      * Initializes a new instance.
@@ -59,9 +59,9 @@ class Themeswitcher_ThemeSelectionCommand
     {
         global $sn, $su;
 
-        $this->_model = $model;
-        $this->_scriptName = (string) $sn;
-        $this->_selectedUrl = (string) $su;
+        $this->model = $model;
+        $this->scriptName = (string) $sn;
+        $this->selectedUrl = (string) $su;
     }
 
     /**
@@ -72,7 +72,7 @@ class Themeswitcher_ThemeSelectionCommand
     public function render()
     {
         return '<form class="themeswitcher_select_form" action="'
-            . XH_hsc($this->_scriptName) . '" method="get">'
+            . XH_hsc($this->scriptName) . '" method="get">'
             . $this->renderSelectedInput()
             . $this->renderSelect()
             . $this->renderSubmitButton()
@@ -88,7 +88,7 @@ class Themeswitcher_ThemeSelectionCommand
     {
         return tag(
             'input type="hidden" name="selected" value="'
-            . XH_hsc($this->_selectedUrl) . '"'
+            . XH_hsc($this->selectedUrl) . '"'
         );
     }
 
@@ -100,7 +100,7 @@ class Themeswitcher_ThemeSelectionCommand
     protected function renderSelect()
     {
         $result = '<select name="themeswitcher_select">';
-        foreach ($this->_model->getThemes() as $theme) {
+        foreach ($this->model->getThemes() as $theme) {
             $result .= $this->renderOption($theme);
         }
         $result .= '</select>';

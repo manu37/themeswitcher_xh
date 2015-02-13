@@ -33,28 +33,28 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      *
      * @var Themeswitcher_Controller
      */
-    private $_subject;
+    protected $subject;
 
     /**
      * The theme selection command.
      *
      * @var Themeswitcher_SelectionCommand
      */
-    private $_themeSelectionCommand;
+    protected $themeSelectionCommand;
 
     /**
      * The info command.
      *
      * @var Themeswitcher_InfoCommand
      */
-    private $_infoCommand;
+    protected $infoCommand;
 
     /**
      * The print_plugin_admin() mock.
      *
      * @var PHPUnit_Extensions_MockFunction
      */
-    private $_printPluginAdmin;
+    protected $printPluginAdmin;
 
     /**
      * Sets up the test fixture.
@@ -69,13 +69,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             runkit_constant_redefine('XH_ADM', true);
         }
         $commandFactory = $this->getMock('Themeswitcher_CommandFactory');
-        $this->_themeSelectionCommand = $this
+        $this->themeSelectionCommand = $this
             ->getMockBuilder('Themeswitcher_ThemeSelectionCommand')
             ->disableOriginalConstructor()
             ->getMock();
         $commandFactory->expects($this->any())
             ->method('makeThemeSelectionCommand')
-            ->will($this->returnValue($this->_themeSelectionCommand));
+            ->will($this->returnValue($this->themeSelectionCommand));
         $this->_selectThemeCommand = $this
             ->getMockBuilder('Themeswitcher_SelectThemeCommand')
             ->disableOriginalConstructor()
@@ -83,13 +83,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $commandFactory->expects($this->any())
             ->method('makeSelectThemeCommand')
             ->will($this->returnValue($this->_selectThemeCommand));
-        $this->_infoCommand = $this->getMockBuilder('Themeswitcher_InfoCommand')
+        $this->infoCommand = $this->getMockBuilder('Themeswitcher_InfoCommand')
             ->disableOriginalConstructor()->getMock();
         $commandFactory->expects($this->any())->method('makeInfoCommand')
-            ->will($this->returnValue($this->_infoCommand));
-        $this->_subject = new Themeswitcher_Controller($commandFactory);
-        $this->_printPluginAdmin = new PHPUnit_Extensions_MockFunction(
-            'print_plugin_admin', $this->_subject
+            ->will($this->returnValue($this->infoCommand));
+        $this->subject = new Themeswitcher_Controller($commandFactory);
+        $this->printPluginAdmin = new PHPUnit_Extensions_MockFunction(
+            'print_plugin_admin', $this->subject
         );
     }
 
@@ -102,7 +102,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     {
         $_GET = array('themeswitcher_select' => 'foo');
         $this->_selectThemeCommand->expects($this->once())->method('execute');
-        $this->_subject->dispatch();
+        $this->subject->dispatch();
     }
 
     /**
@@ -114,7 +114,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     {
         $_COOKIE = array('themeswitcher_theme' => 'foo');
         $this->_selectThemeCommand->expects($this->once())->method('execute');
-        $this->_subject->dispatch();
+        $this->subject->dispatch();
     }
 
     /**
@@ -131,9 +131,9 @@ class ControllerTest extends PHPUnit_Framework_TestCase
 
         $themeswitcher = 'true';
         $admin = '';
-        $this->_printPluginAdmin->expects($this->once());
-        $this->_infoCommand->expects($this->once())->method('render');
-        $this->_subject->dispatch();
+        $this->printPluginAdmin->expects($this->once());
+        $this->infoCommand->expects($this->once())->method('render');
+        $this->subject->dispatch();
     }
 
     /**
@@ -152,14 +152,14 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $themeswitcher = 'true';
         $admin = 'plugin_config';
         $action = 'plugin_edit';
-        $this->_printPluginAdmin->expects($this->once());
+        $this->printPluginAdmin->expects($this->once());
         $pluginAdminCommon = new PHPUnit_Extensions_MockFunction(
-            'plugin_admin_common', $this->_subject
+            'plugin_admin_common', $this->subject
         );
         $pluginAdminCommon->expects($this->once())->with(
             $admin, $action, 'themeswitcher'
         );
-        $this->_subject->dispatch();
+        $this->subject->dispatch();
     }
 
     /**
@@ -169,8 +169,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testThemeSelection()
     {
-        $this->_themeSelectionCommand->expects($this->once())->method('render');
-        $this->_subject->renderThemeSelection();
+        $this->themeSelectionCommand->expects($this->once())->method('render');
+        $this->subject->renderThemeSelection();
 
     }
 }

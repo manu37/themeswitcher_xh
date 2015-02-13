@@ -31,7 +31,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
      *
      * @var Themeswitcher_InfoCommand
      */
-    private $_subject;
+    protected $subject;
 
     /**
      * Sets up the test fixture.
@@ -45,7 +45,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
         } else {
             runkit_constant_redefine('THEMESWITCHER_VERSION', '1.0');
         }
-        $this->_subject = new Themeswitcher_InfoCommand();
+        $this->subject = new Themeswitcher_InfoCommand();
     }
 
     /**
@@ -59,7 +59,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
             'tag' => 'h1',
             'content' => "Themeswitcher \xE2\x80\x93 Info"
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -73,7 +73,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
             'tag' => 'p',
             'content' => 'Version: ' . THEMESWITCHER_VERSION
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -87,7 +87,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
             'tag' => 'p',
             'content' => "Copyright \xC2\xA9"
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -102,7 +102,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
             'attributes' => array('class' => 'themeswitcher_license'),
             'content' => 'This program is free software:'
         );
-        $this->_assertRenders($matcher);
+        $this->assertRenders($matcher);
     }
 
     /**
@@ -112,9 +112,9 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    private function _assertRenders($matcher)
+    protected function assertRenders($matcher)
     {
-        @$this->assertTag($matcher, $this->_subject->render());
+        @$this->assertTag($matcher, $this->subject->render());
     }
 }
 

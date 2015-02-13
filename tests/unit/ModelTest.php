@@ -33,9 +33,19 @@ use org\bovigo\vfs\vfsStream;
  */
 class ModelTest extends PHPUnit_Framework_TestCase
 {
-    private $_subject;
+    /**
+     * The test subject.
+     *
+     * @var Themeswitcher_Model
+     */
+    protected $subject;
 
-    private $_themeFolder;
+    /**
+     * The paths of the theme folder.
+     *
+     * @var string
+     */
+    protected $themeFolder;
 
     /**
      * Sets up the test fixture.
@@ -50,13 +60,13 @@ class ModelTest extends PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('templates'));
-        $this->_themeFolder = vfsStream::url('templates/');
+        $this->themeFolder = vfsStream::url('templates/');
         foreach (array('one', 'two', 'three') as $theme) {
-            mkdir($this->_themeFolder . $theme, 0777, true);
-            touch($this->_themeFolder . $theme . '/template.htm');
+            mkdir($this->themeFolder . $theme, 0777, true);
+            touch($this->themeFolder . $theme . '/template.htm');
         }
-        $pth = array('folder' => array('templates' => $this->_themeFolder));
-        $this->_subject = new Themeswitcher_Model();
+        $pth = array('folder' => array('templates' => $this->themeFolder));
+        $this->subject = new Themeswitcher_Model();
     }
 
     /**
@@ -68,7 +78,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             array('one', 'three', 'two'),
-            $this->_subject->getThemes()
+            $this->subject->getThemes()
         );
     }
 
@@ -83,18 +93,18 @@ class ModelTest extends PHPUnit_Framework_TestCase
     {
         global $pth;
 
-        $this->_subject->switchTheme('two');
+        $this->subject->switchTheme('two');
         $this->assertEquals(
             array(
                 'folder' => array(
-                    'templates' => $this->_themeFolder,
-                    'template' => $this->_themeFolder . 'two/',
-                    'menubuttons' => $this->_themeFolder . 'two/menu/',
-                    'templateimages' => $this->_themeFolder . 'two/images/'
+                    'templates' => $this->themeFolder,
+                    'template' => $this->themeFolder . 'two/',
+                    'menubuttons' => $this->themeFolder . 'two/menu/',
+                    'templateimages' => $this->themeFolder . 'two/images/'
                 ),
                 'file' => array(
-                    'template' => $this->_themeFolder . 'two/template.htm',
-                    'stylesheet' => $this->_themeFolder . 'two/stylesheet.css'
+                    'template' => $this->themeFolder . 'two/template.htm',
+                    'stylesheet' => $this->themeFolder . 'two/stylesheet.css'
                 )
             ),
             $pth
