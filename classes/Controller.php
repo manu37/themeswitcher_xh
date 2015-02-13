@@ -55,8 +55,13 @@ class Themeswitcher_Controller
         ) {
             $this->commandFactory->makeSelectThemeCommand()->execute();
         }
-        if ($this->isPluginAdministration()) {
-            $this->handleAdministration();
+        if (XH_ADM) {
+            if (function_exists('XH_registerStandardPluginMenuItems')) {
+                XH_registerStandardPluginMenuItems(false);
+            }
+            if ($this->isAdministrationRequested()) {
+                $this->handleAdministration();
+            }
         }
     }
 
@@ -67,11 +72,13 @@ class Themeswitcher_Controller
      *
      * @global string Whether the plugin is requested.
      */
-    protected function isPluginAdministration()
+    protected function isAdministrationRequested()
     {
         global $themeswitcher;
 
-        return XH_ADM && isset($themeswitcher) && $themeswitcher == 'true';
+        return function_exists('XH_wantsPluginAdministration')
+            && XH_wantsPluginAdministration('themeswitcher')
+            || isset($themeswitcher) && $themeswitcher == 'true';
     }
 
     /**

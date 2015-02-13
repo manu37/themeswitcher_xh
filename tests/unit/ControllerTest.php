@@ -91,6 +91,9 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $this->printPluginAdmin = new PHPUnit_Extensions_MockFunction(
             'print_plugin_admin', $this->subject
         );
+        new PHPUnit_Extensions_MockFunction(
+            'XH_registerStandardPluginMenuItems', $this->subject
+        );
     }
 
     /**
