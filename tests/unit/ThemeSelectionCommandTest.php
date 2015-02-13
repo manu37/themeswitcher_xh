@@ -136,9 +136,9 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
         $matcher = array(
             'tag' => 'option',
             'attributes' => array(
-                'label' => 'two',
                 'value' => 'two'
             ),
+            'content' => 'two',
             'parent' => array('tag' => 'select')
         );
         $this->assertRenders($matcher);
