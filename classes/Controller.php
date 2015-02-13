@@ -93,7 +93,7 @@ class Themeswitcher_Controller
             $o .= $this->commandFactory->makeInfoCommand()->render();
             break;
         default:
-            $o .= plugin_admin_common($admin, $action, 'themeswitcher');
+            $o .= plugin_admin_common($action, $admin, 'themeswitcher');
         }
     }
 
