@@ -33,7 +33,7 @@ class Themeswitcher_InfoCommand
     {
         return '<h1>Themeswitcher &ndash; Info</h1>'
             . '<p>Version: ' . THEMESWITCHER_VERSION . '</p>'
-            . $this->_renderCopyright() . $this->_renderLicense();
+            . $this->renderCopyright() . $this->renderLicense();
     }
 
     /**
@@ -41,7 +41,7 @@ class Themeswitcher_InfoCommand
      *
      * @return string (X)HTML.
      */
-    private function _renderCopyright()
+    protected function renderCopyright()
     {
         return '<p>Copyright &copy; 2014-2015 <a href="http://3-magi.net/">'
             . 'Christoph M. Becker</a></p>';
@@ -52,7 +52,7 @@ class Themeswitcher_InfoCommand
      *
      * @return string (X)HTML.
      */
-    private function _renderLicense()
+    protected function renderLicense()
     {
         return <<<EOT
 <p class="themeswitcher_license">This program is free software: you can

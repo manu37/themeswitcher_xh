@@ -55,8 +55,8 @@ class Themeswitcher_Controller
         ) {
             $this->_commandFactory->makeSelectThemeCommand()->execute();
         }
-        if ($this->_isPluginAdministration()) {
-            $this->_handleAdministration();
+        if ($this->isPluginAdministration()) {
+            $this->handleAdministration();
         }
     }
 
@@ -67,7 +67,7 @@ class Themeswitcher_Controller
      *
      * @global string Whether the plugin is requested.
      */
-    private function _isPluginAdministration()
+    protected function isPluginAdministration()
     {
         global $themeswitcher;
 
@@ -83,7 +83,7 @@ class Themeswitcher_Controller
      * @global string The value of the <var>action</var> GP parameter.
      * @global string The output for the content area.
      */
-    private function _handleAdministration()
+    protected function handleAdministration()
     {
         global $admin, $action, $o;
 

@@ -73,9 +73,9 @@ class Themeswitcher_ThemeSelectionCommand
     {
         return '<form class="themeswitcher_select_form" action="'
             . XH_hsc($this->_scriptName) . '" method="get">'
-            . $this->_renderSelectedInput()
-            . $this->_renderSelect()
-            . $this->_renderSubmitButton()
+            . $this->renderSelectedInput()
+            . $this->renderSelect()
+            . $this->renderSubmitButton()
             . '</form>';
     }
 
@@ -84,7 +84,7 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @return string (X)HTML.
      */
-    private function _renderSelectedInput()
+    protected function renderSelectedInput()
     {
         return tag(
             'input type="hidden" name="selected" value="'
@@ -97,11 +97,11 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @return string (X)HTML.
      */
-    private function _renderSelect()
+    protected function renderSelect()
     {
         $result = '<select name="themeswitcher_select">';
         foreach ($this->_model->getThemes() as $theme) {
-            $result .= $this->_renderOption($theme);
+            $result .= $this->renderOption($theme);
         }
         $result .= '</select>';
         return $result;
@@ -114,7 +114,7 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @return string (X)HTML.
      */
-    private function _renderOption($theme)
+    protected function renderOption($theme)
     {
         $theme = XH_hsc($theme);
         return tag('option label="' . $theme . '" value="' . $theme . '"');
@@ -127,7 +127,7 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @global array The localization of the plugins.
      */
-    private function _renderSubmitButton()
+    protected function renderSubmitButton()
     {
         global $plugin_tx;
 

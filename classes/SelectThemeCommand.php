@@ -50,11 +50,11 @@ class Themeswitcher_SelectThemeCommand
      */
     public function execute()
     {
-        if ($this->_isUserThemeAllowed()
-            && (!$this->_hasPageTheme() || !$this->_isPageThemePreferred())
+        if ($this->isUserThemeAllowed()
+            && (!$this->hasPageTheme() || !$this->isPageThemePreferred())
         ) {
-            $this->_model->switchTheme($this->_getUserTheme());
-            $this->_setThemeCookie();
+            $this->_model->switchTheme($this->getUserTheme());
+            $this->setThemeCookie();
         }
     }
 
@@ -63,9 +63,9 @@ class Themeswitcher_SelectThemeCommand
      *
      * @return bool
      */
-    private function _isUserThemeAllowed()
+    protected function isUserThemeAllowed()
     {
-        return in_array($this->_getUserTheme(), $this->_model->getThemes());
+        return in_array($this->getUserTheme(), $this->_model->getThemes());
     }
 
     /**
@@ -75,7 +75,7 @@ class Themeswitcher_SelectThemeCommand
      *
      * @global array The page data of the selected page.
      */
-    private function _hasPageTheme()
+    protected function hasPageTheme()
     {
         global $pd_current;
 
@@ -89,7 +89,7 @@ class Themeswitcher_SelectThemeCommand
      *
      * @global array The configuration of the plugins.
      */
-    private function _isPageThemePreferred()
+    protected function isPageThemePreferred()
     {
         global $plugin_cf;
 
@@ -101,7 +101,7 @@ class Themeswitcher_SelectThemeCommand
      *
      * @return string
      */
-    private function _getUserTheme()
+    protected function getUserTheme()
     {
         if (isset($_GET['themeswitcher_select'])) {
             return stsl($_GET['themeswitcher_select']);
@@ -115,11 +115,11 @@ class Themeswitcher_SelectThemeCommand
      *
      * @return void
      */
-    private function _setThemeCookie()
+    protected function setThemeCookie()
     {
         if (isset($_GET['themeswitcher_select'])) {
             setcookie(
-                'themeswitcher_theme', $this->_getUserTheme(),
+                'themeswitcher_theme', $this->getUserTheme(),
                 0, CMSIMPLE_ROOT
             );
         }
