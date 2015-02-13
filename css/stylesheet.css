@@ -2,6 +2,9 @@
  * Theme selection.
  */
 .themeswitcher_select_form {}
+.themeswitcher_select_form label {
+    padding-right: 1em;
+}
 .themeswitcher_select_form select {}
 .themeswitcher_select_form button {}
 

@@ -71,17 +71,24 @@ class Themeswitcher_ThemeSelectionCommand
      *
      * @global array  The paths of system files and folders.
      * @global string The (X)HTML to insert before the closing body tag.
+     * @global array  The localization of the plugins.
+     *
+     * @staticvar int The running number.
      */
     public function render()
     {
-        global $pth, $bjs;
+        global $pth, $bjs, $plugin_tx;
+        static $run = 0;
 
+        $run++;
         $bjs .= '<script type="text/javascript" src="' . $pth['folder']['plugins']
             . 'themeswitcher/themeswitcher.js"></script>';
         return '<form class="themeswitcher_select_form" action="'
             . XH_hsc($this->scriptName) . '" method="get">'
+            . '<label for="themeswitcher_' . $run . '">'
+            . $plugin_tx['themeswitcher']['label_theme'] . '</label>'
             . $this->renderSelectedInput()
-            . $this->renderSelect()
+            . $this->renderSelect($run)
             . $this->renderSubmitButton()
             . '</form>';
     }
@@ -102,16 +109,19 @@ class Themeswitcher_ThemeSelectionCommand
     /**
      * Renders the select element.
      *
+     * @param int $run A running number.
+     *
      * @return string (X)HTML.
      */
-    protected function renderSelect()
+    protected function renderSelect($run)
     {
-        $result = '<select name="themeswitcher_select">';
+        $html = '<select id="themeswitcher_' . $run
+            . '" name="themeswitcher_select">';
         foreach ($this->model->getThemes() as $theme) {
-            $result .= $this->renderOption($theme);
+            $html .= $this->renderOption($theme);
         }
-        $result .= '</select>';
-        return $result;
+        $html .= '</select>';
+        return $html;
     }
 
     /**
