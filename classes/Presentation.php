@@ -8,7 +8,7 @@
  * @category  CMSimple_XH
  * @package   Themeswitcher
  * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014 Christoph M. Becker <http://3-magi.net>
+ * @copyright 2014-2015 Christoph M. Becker <http://3-magi.net>
  * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
@@ -420,7 +420,7 @@ class Themeswitcher_InfoCommand
      */
     private function _renderCopyright()
     {
-        return '<p>Copyright &copy; 2014 <a href="http://3-magi.net/">'
+        return '<p>Copyright &copy; 2014-2015 <a href="http://3-magi.net/">'
             . 'Christoph M. Becker</a></p>';
     }
 
