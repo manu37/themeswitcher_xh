@@ -123,12 +123,12 @@ class Themeswitcher_ThemeSelectionCommand
      */
     protected function renderOption($theme)
     {
-        $theme = XH_hsc($theme);
-        $tag = 'option label="' . $theme . '" value="' . $theme . '"';
+        $html = '<option value="' . XH_hsc($theme) . '"';
         if ($theme == $this->getCurrentTheme()) {
-            $tag .= ' selected="selected"';
+            $html .= ' selected="selected"';
         }
-        return tag($tag);
+        $html .= '>' . XH_hsc($theme) . '</option>';
+        return $html;
     }
 
     /**
