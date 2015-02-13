@@ -117,7 +117,11 @@ class Themeswitcher_ThemeSelectionCommand
     protected function renderOption($theme)
     {
         $theme = XH_hsc($theme);
-        return tag('option label="' . $theme . '" value="' . $theme . '"');
+        $tag = 'option label="' . $theme . '" value="' . $theme . '"';
+        if ($theme == $this->getCurrentTheme()) {
+            $tag .= ' selected="selected"';
+        }
+        return tag($tag);
     }
 
     /**
@@ -133,6 +137,26 @@ class Themeswitcher_ThemeSelectionCommand
 
         return '<button>' . $plugin_tx['themeswitcher']['label_activate']
             . '</button>';
+    }
+
+    /**
+     * Returns the current theme.
+     *
+     * @return string
+     *
+     * @global array The configuration of the core.
+     */
+    protected function getCurrentTheme()
+    {
+        global $cf;
+
+        if (isset($_GET['themeswitcher_select'])) {
+            return stsl($_GET['themeswitcher_select']);
+        } elseif (isset($_COOKIE['themeswitcher_theme'])) {
+            return stsl($_COOKIE['themeswitcher_theme']);
+        } else {
+            return $cf['site']['template'];
+        }
     }
 }
 
