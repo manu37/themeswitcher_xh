@@ -167,7 +167,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
      */
     private function _assertRenders($matcher)
     {
-        $this->assertTag($matcher, $this->_subject->render());
+        @$this->assertTag($matcher, $this->_subject->render());
     }
 }
 
