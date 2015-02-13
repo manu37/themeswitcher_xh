@@ -79,7 +79,7 @@ class Themeswitcher_SelectThemeCommand
     {
         global $pd_current;
 
-        return $pd_current['template'] != '';
+        return !empty($pd_current['template']);
     }
 
     /**
