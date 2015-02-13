@@ -59,5 +59,5 @@
         });
     }
 
-    initForms();
+    on(window, "load", initForms);
 }());
