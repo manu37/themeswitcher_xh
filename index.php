@@ -35,13 +35,13 @@ EOT
 define('THEMESWITCHER_VERSION', '@THEMESWITCHER_VERSION@');
 
 /**
- * Renders the theme selection.
+ * Renders the theme selection form.
  *
  * @return string (X)HTML.
  *
  * @global Themeswitcher_Controller The controller.
  */
-function Themeswitcher_selection()
+function themeswitcher()
 {
     global $_Themeswitcher_controller;
 
