@@ -68,9 +68,16 @@ class Themeswitcher_ThemeSelectionCommand
      * Renders the view.
      *
      * @return string (X)HTML.
+     *
+     * @global array  The paths of system files and folders.
+     * @global string The (X)HTML to insert before the closing body tag.
      */
     public function render()
     {
+        global $pth, $bjs;
+
+        $bjs .= '<script type="text/javascript" src="' . $pth['folder']['plugins']
+            . 'themeswitcher/themeswitcher.js"></script>';
         return '<form class="themeswitcher_select_form" action="'
             . XH_hsc($this->scriptName) . '" method="get">'
             . $this->renderSelectedInput()
