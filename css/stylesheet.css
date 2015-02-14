@@ -1,6 +1,7 @@
 /*
  * Theme selection.
  */
+
 .themeswitcher_select_form {}
 .themeswitcher_select_form label {
     padding-right: 1em;
@@ -11,6 +12,11 @@
 /*
  * Plugin administration.
  */
+
+.themeswitcher_logo {
+    float: left;
+    margin: 0 8px 8px 0;
+}
 .themeswitcher_license {
     text-align: justify;
 }

@@ -32,8 +32,28 @@ class Themeswitcher_InfoCommand
     public function render()
     {
         return '<h1>Themeswitcher &ndash; Info</h1>'
+            . $this->renderLogo()
             . '<p>Version: ' . THEMESWITCHER_VERSION . '</p>'
             . $this->renderCopyright() . $this->renderLicense();
+    }
+
+    /**
+     * Renders the plugin logo.
+     *
+     * @return string (X)HTML.
+     *
+     * @global array The paths of system files and folders.
+     * @global array The localization of the plugins.
+     */
+    protected function renderLogo()
+    {
+        global $pth, $plugin_tx;
+
+        return tag(
+            'img src="' . $pth['folder']['plugins']
+            . 'themeswitcher/themeswitcher.png" class="themeswitcher_logo" alt="'
+            . $plugin_tx['themeswitcher']['alt_logo'] . '"'
+        );
     }
 
     /**
