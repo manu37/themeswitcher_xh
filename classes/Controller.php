@@ -55,6 +55,9 @@ class Themeswitcher_Controller
         ) {
             $this->commandFactory->makeSelectThemeCommand()->execute();
         }
+        if ($this->isAutomatic()) {
+            $this->outputContents($this->renderThemeSelection());
+        }
         if (XH_ADM) {
             if (function_exists('XH_registerStandardPluginMenuItems')) {
                 XH_registerStandardPluginMenuItems(false);
@@ -63,6 +66,40 @@ class Themeswitcher_Controller
                 $this->handleAdministration();
             }
         }
+    }
+
+    /**
+     * Whether the theme selection is displayed automatically.
+     *
+     * @return bool
+     *
+     * @global bool  Whether the print view is requested.
+     * @global bool  Whether we're in edit mode.
+     * @global array The configuration of the plugins.
+     */
+    protected function isAutomatic()
+    {
+        global $print, $edit, $plugin_cf;
+
+        $mode = $plugin_cf['themeswitcher']['display_automatic'];
+        return ($mode == 'always' || $mode == 'frontend' && !$edit)
+            && !$print;
+    }
+
+    /**
+     * Outputs (X)HTML to the contents area.
+     *
+     * @param string $html Some (X)HTML.
+     *
+     * @return void
+     *     *
+     * @global string The (X)HTML of the contents area.
+     */
+    protected function outputContents($html)
+    {
+        global $o;
+
+        $o .= $html;
     }
 
     /**
