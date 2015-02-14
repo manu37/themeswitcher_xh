@@ -103,8 +103,8 @@ class Themeswitcher_SelectThemeCommand
      */
     protected function getUserTheme()
     {
-        if (isset($_GET['themeswitcher_select'])) {
-            return stsl($_GET['themeswitcher_select']);
+        if (isset($_POST['themeswitcher_select'])) {
+            return stsl($_POST['themeswitcher_select']);
         } else {
             return stsl($_COOKIE['themeswitcher_theme']);
         }
@@ -117,7 +117,7 @@ class Themeswitcher_SelectThemeCommand
      */
     protected function setThemeCookie()
     {
-        if (isset($_GET['themeswitcher_select'])) {
+        if (isset($_POST['themeswitcher_select'])) {
             setcookie(
                 'themeswitcher_theme', $this->getUserTheme(),
                 0, CMSIMPLE_ROOT

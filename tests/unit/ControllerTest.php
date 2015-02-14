@@ -103,7 +103,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testExecutesSelectThemeCommandOnGet()
     {
-        $_GET = array('themeswitcher_select' => 'foo');
+        $_POST = array('themeswitcher_select' => 'foo');
         $this->_selectThemeCommand->expects($this->once())->method('execute');
         $this->subject->dispatch();
     }

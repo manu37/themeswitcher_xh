@@ -32,36 +32,15 @@ class Themeswitcher_ThemeSelectionCommand
     protected $model;
 
     /**
-     * The script name
-     *
-     * @var string
-     */
-    protected $scriptName;
-
-    /**
-     * The selected URL.
-     *
-     * @var string
-     */
-    protected $selectedUrl;
-
-    /**
      * Initializes a new instance.
      *
      * @param Themeswitcher_Model $model A model.
      *
      * @return void
-     *
-     * @global string The script name.
-     * @global string The selected URL.
      */
     public function __construct(Themeswitcher_Model $model)
     {
-        global $sn, $su;
-
         $this->model = $model;
-        $this->scriptName = (string) $sn;
-        $this->selectedUrl = (string) $su;
     }
 
     /**
@@ -83,27 +62,12 @@ class Themeswitcher_ThemeSelectionCommand
         $run++;
         $bjs .= '<script type="text/javascript" src="' . $pth['folder']['plugins']
             . 'themeswitcher/themeswitcher.js"></script>';
-        return '<form class="themeswitcher_select_form" action="'
-            . XH_hsc($this->scriptName) . '" method="get">'
+        return '<form class="themeswitcher_select_form" method="post">'
             . '<label for="themeswitcher_' . $run . '">'
             . $plugin_tx['themeswitcher']['label_theme'] . '</label>'
-            . $this->renderSelectedInput()
             . $this->renderSelect($run)
             . $this->renderSubmitButton()
             . '</form>';
-    }
-
-    /**
-     * Renders the selected input element.
-     *
-     * @return string (X)HTML.
-     */
-    protected function renderSelectedInput()
-    {
-        return tag(
-            'input type="hidden" name="selected" value="'
-            . XH_hsc($this->selectedUrl) . '"'
-        );
     }
 
     /**
@@ -167,8 +131,8 @@ class Themeswitcher_ThemeSelectionCommand
     {
         global $cf;
 
-        if (isset($_GET['themeswitcher_select'])) {
-            return stsl($_GET['themeswitcher_select']);
+        if (isset($_POST['themeswitcher_select'])) {
+            return stsl($_POST['themeswitcher_select']);
         } elseif (isset($_COOKIE['themeswitcher_theme'])) {
             return stsl($_COOKIE['themeswitcher_theme']);
         } else {

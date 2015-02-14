@@ -75,32 +75,8 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
             'tag' => 'form',
             'attributes' => array(
                 'class' => 'themeswitcher_select_form',
-                'method' => 'get',
-                'action' => $sn
+                'method' => 'post'
             )
-        );
-        $this->assertRenders($matcher);
-    }
-
-    /**
-     * Test that the selected input element is rendered.
-     *
-     * @return void
-     *
-     * @global string The selected URL.
-     */
-    public function testRendersSelectedInput()
-    {
-        global $su;
-
-        $matcher = array(
-            'tag' => 'input',
-            'attributes' => array(
-                'type' => 'hidden',
-                'name' => 'selected',
-                'value' => $su
-            ),
-            'ancestor' => array('tag' => 'form')
         );
         $this->assertRenders($matcher);
     }

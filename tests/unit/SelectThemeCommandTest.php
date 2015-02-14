@@ -76,7 +76,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
      */
     public function testSwitchesThemeOnGet()
     {
-        $_GET = array('themeswitcher_select' => 'one');
+        $_POST = array('themeswitcher_select' => 'one');
         $this->model->expects($this->once())->method('switchTheme')
             ->with($this->equalTo('one'));
         $this->subject->execute();
@@ -102,7 +102,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
      */
     public function testDontSwitchThemeIfNotAllowed()
     {
-        $_GET = array('themeswitcher_select' => 'foo');
+        $_POST = array('themeswitcher_select' => 'foo');
         $this->model->expects($this->never())->method('switchTheme');
         $this->subject->execute();
     }
@@ -121,7 +121,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
 
         $pd_current = array('template' => 'two');
         $plugin_cf = array('themeswitcher' => array('prefer_page_theme' => ''));
-        $_GET = array('themeswitcher_select' => 'one');
+        $_POST = array('themeswitcher_select' => 'one');
         $this->model->expects($this->once())->method('switchTheme');
         $this->subject->execute();
     }
@@ -140,7 +140,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
 
         $pd_current = array('template' => 'two');
         $plugin_cf = array('themeswitcher' => array('prefer_page_theme' => 'true'));
-        $_GET = array('themeswitcher_select' => 'one');
+        $_POST = array('themeswitcher_select' => 'one');
         $this->model->expects($this->never())->method('switchTheme');
         $this->subject->execute();
     }
@@ -152,7 +152,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
      */
     public function testCookieIsSetOnGet()
     {
-        $_GET = array('themeswitcher_select' => 'one');
+        $_POST = array('themeswitcher_select' => 'one');
         $this->setcookie->expects($this->once())->with(
             'themeswitcher_theme', 'one', 0, CMSIMPLE_ROOT
         );
