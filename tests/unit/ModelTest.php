@@ -43,7 +43,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        global $pth;
+        global $pth, $plugin_cf;
 
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('templates'));
@@ -53,6 +53,9 @@ class ModelTest extends PHPUnit_Framework_TestCase
             touch($this->themeFolder . $theme . '/template.htm');
         }
         $pth = array('folder' => array('templates' => $this->themeFolder));
+        $plugin_cf = array(
+            'themeswitcher' => ['allowed_themes' => '*']
+        );
         $this->subject = new Model();
     }
 

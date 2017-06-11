@@ -24,11 +24,51 @@ namespace Themeswitcher;
 class Model
 {
     /**
-     * @return array
+     * @return string[]
      */
     public function getThemes()
     {
-        return array_values(XH_templates());
+        $themes = [];
+        foreach (XH_templates() as $theme) {
+            if ($this->isThemeAllowed($theme)) {
+                $themes[] = $theme;
+            }
+        }
+        return $themes;
+    }
+
+    /**
+     * @param string $theme
+     * @return bool
+     */
+    private function isThemeAllowed($theme)
+    {
+        global $plugin_cf;
+
+        $allowedThemes = explode(',', $plugin_cf['themeswitcher']['allowed_themes']);
+        foreach ($allowedThemes as $allowedTheme) {
+            if ($this->fnmatch($allowedTheme, $theme)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param string $pattern
+     * @param string $string
+     * @return bool
+     */
+    private function fnmatch($pattern, $string)
+    {
+        $pattern = strtr(
+            preg_quote($pattern, '/'),
+            array(
+                '\*' => '.*',
+                '\?' => '.'
+            )
+        );
+        return (bool) preg_match("/^{$pattern}$/", $string);
     }
 
     /**
