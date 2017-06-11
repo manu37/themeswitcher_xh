@@ -43,7 +43,7 @@ class ThemeSelectionCommand
      */
     public function render()
     {
-        global $pth, $bjs, $plugin_tx;
+        global $su, $pth, $bjs, $plugin_tx;
         static $run = 0;
 
         $run++;
@@ -51,6 +51,7 @@ class ThemeSelectionCommand
             . 'themeswitcher/themeswitcher.js"></script>';
         $view = new View('form');
         $view->run = $run;
+        $view->selected = $su;
         $view->themes = $this->getThemes();
         return (string) $view;
     }
@@ -77,8 +78,8 @@ class ThemeSelectionCommand
     {
         global $cf;
 
-        if (isset($_POST['themeswitcher_select'])) {
-            return $_POST['themeswitcher_select'];
+        if (isset($_GET['themeswitcher_select'])) {
+            return $_GET['themeswitcher_select'];
         } elseif (isset($_COOKIE['themeswitcher_theme'])) {
             return $_COOKIE['themeswitcher_theme'];
         } else {

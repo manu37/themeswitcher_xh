@@ -1,4 +1,5 @@
-<form class="themeswitcher_select_form" method="post">
+<form class="themeswitcher_select_form" method="get">
+    <input type="hidden" name="selected" value="<?=$this->selected()?>">
     <label for="themeswitcher_<?=$this->run()?>"><?=$this->text('label_theme')?></label>
     <select id="themeswitcher_<?=$this->run()?>" name="themeswitcher_select">
 <?php foreach ($this->themes as $theme):?>

@@ -41,7 +41,7 @@ class Controller
      */
     public function dispatch()
     {
-        if (isset($_POST['themeswitcher_select'])
+        if (isset($_GET['themeswitcher_select'])
             || isset($_COOKIE['themeswitcher_theme'])
         ) {
             $this->commandFactory->makeSelectThemeCommand()->execute();

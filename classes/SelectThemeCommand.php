@@ -82,8 +82,8 @@ class SelectThemeCommand
      */
     private function getUserTheme()
     {
-        if (isset($_POST['themeswitcher_select'])) {
-            return $_POST['themeswitcher_select'];
+        if (isset($_GET['themeswitcher_select'])) {
+            return $_GET['themeswitcher_select'];
         } else {
             return $_COOKIE['themeswitcher_theme'];
         }
@@ -94,7 +94,7 @@ class SelectThemeCommand
      */
     private function setThemeCookie()
     {
-        if (isset($_POST['themeswitcher_select'])) {
+        if (isset($_GET['themeswitcher_select'])) {
             setcookie('themeswitcher_theme', $this->getUserTheme(), 0, CMSIMPLE_ROOT);
         }
     }
