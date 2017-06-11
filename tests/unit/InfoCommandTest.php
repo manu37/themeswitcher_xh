@@ -100,7 +100,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
         $matcher = array(
             'tag' => 'p',
             'attributes' => array('class' => 'themeswitcher_license'),
-            'content' => 'This program is free software:'
+            'content' => 'Themeswitcher_XH is free software:'
         );
         $this->assertRenders($matcher);
     }
