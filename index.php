@@ -39,7 +39,7 @@ define('THEMESWITCHER_VERSION', '@THEMESWITCHER_VERSION@');
  *
  * @return string (X)HTML.
  *
- * @global Themeswitcher_Controller The controller.
+ * @global Controller The controller.
  */
 function themeswitcher()
 {
@@ -51,10 +51,10 @@ function themeswitcher()
 /**
  * The controller.
  *
- * @var Themeswitcher_Controller
+ * @var Controller
  */
-$_Themeswitcher_controller = new Themeswitcher_Controller(
-    new Themeswitcher_CommandFactory()
+$_Themeswitcher_controller = new Themeswitcher\Controller(
+    new Themeswitcher\CommandFactory()
 );
 $_Themeswitcher_controller->dispatch();
 

@@ -13,6 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
 /**
  * The info command.
  *
@@ -22,7 +24,7 @@
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
-class Themeswitcher_InfoCommand
+class InfoCommand
 {
     /**
      * Renders the view.

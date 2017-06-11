@@ -13,6 +13,11 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Extensions_MockFunction;
+
 /**
  * Testing the select theme command.
  *
@@ -27,14 +32,14 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_SelectThemeCommand
+     * @var SelectThemeCommand
      */
     protected $subject;
 
     /**
      * The model.
      *
-     * @var Themeswitcher_Model
+     * @var Model
      */
     protected $model;
 
@@ -55,10 +60,10 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
         if (!defined('CMSIMPLE_ROOT')) {
             define('CMSIMPLE_ROOT', '/');
         }
-        $this->model = $this->getMock('Themeswitcher_Model');
+        $this->model = $this->getMock('Themeswitcher\Model');
         $this->model->expects($this->any())->method('getThemes')
             ->will($this->returnValue(array('one', 'three', 'two')));
-        $this->subject = new Themeswitcher_SelectThemeCommand($this->model);
+        $this->subject = new SelectThemeCommand($this->model);
         $this->setcookie = new PHPUnit_Extensions_MockFunction(
             'setcookie', $this->subject
         );

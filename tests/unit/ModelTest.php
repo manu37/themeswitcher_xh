@@ -13,6 +13,9 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
 use org\bovigo\vfs\vfsStreamWrapper;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStream;
@@ -31,7 +34,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_Model
+     * @var Model
      */
     protected $subject;
 
@@ -61,7 +64,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
             touch($this->themeFolder . $theme . '/template.htm');
         }
         $pth = array('folder' => array('templates' => $this->themeFolder));
-        $this->subject = new Themeswitcher_Model();
+        $this->subject = new Model();
     }
 
     /**

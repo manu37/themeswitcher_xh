@@ -13,6 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
 /**
  * The select theme command.
  *
@@ -22,23 +24,23 @@
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
-class Themeswitcher_SelectThemeCommand
+class SelectThemeCommand
 {
     /**
      * The model.
      *
-     * @var Themeswitcher_Model
+     * @var Model
      */
     protected $model;
 
     /**
      * Initializes a new instance.
      *
-     * @param Themeswitcher_Model $model A model.
+     * @param Model $model A model.
      *
      * @return void
      */
-    public function __construct(Themeswitcher_Model $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }

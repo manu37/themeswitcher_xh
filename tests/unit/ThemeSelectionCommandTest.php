@@ -13,6 +13,10 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
+
 /**
  * Testing the theme selection command.
  *
@@ -27,7 +31,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_ThemeSelectionCommand
+     * @var ThemeSelectionCommand
      */
     protected $subject;
 
@@ -49,11 +53,11 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
         $plugin_tx['themeswitcher'] = array(
             'label_activate' => 'Activate Theme'
         );
-        $model = $this->getMock('Themeswitcher_Model');
+        $model = $this->getMock('Themeswitcher\Model');
         $model->expects($this->any())->method('getThemes')->will(
             $this->returnValue(array('one', 'three', 'two'))
         );
-        $this->subject = new Themeswitcher_ThemeSelectionCommand($model);
+        $this->subject = new ThemeSelectionCommand($model);
     }
 
     /**

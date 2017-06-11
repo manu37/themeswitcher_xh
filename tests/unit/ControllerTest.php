@@ -13,6 +13,11 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Extensions_MockFunction;
+
 /**
  * Testing the controller.
  *
@@ -27,21 +32,21 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_Controller
+     * @var Controller
      */
     protected $subject;
 
     /**
      * The theme selection command.
      *
-     * @var Themeswitcher_SelectionCommand
+     * @var SelectionCommand
      */
     protected $themeSelectionCommand;
 
     /**
      * The info command.
      *
-     * @var Themeswitcher_InfoCommand
+     * @var InfoCommand
      */
     protected $infoCommand;
 
@@ -64,26 +69,26 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         } else {
             runkit_constant_redefine('XH_ADM', true);
         }
-        $commandFactory = $this->getMock('Themeswitcher_CommandFactory');
+        $commandFactory = $this->getMock('Themeswitcher\CommandFactory');
         $this->themeSelectionCommand = $this
-            ->getMockBuilder('Themeswitcher_ThemeSelectionCommand')
+            ->getMockBuilder('Themeswitcher\ThemeSelectionCommand')
             ->disableOriginalConstructor()
             ->getMock();
         $commandFactory->expects($this->any())
             ->method('makeThemeSelectionCommand')
             ->will($this->returnValue($this->themeSelectionCommand));
         $this->_selectThemeCommand = $this
-            ->getMockBuilder('Themeswitcher_SelectThemeCommand')
+            ->getMockBuilder('Themeswitcher\SelectThemeCommand')
             ->disableOriginalConstructor()
             ->getMock();
         $commandFactory->expects($this->any())
             ->method('makeSelectThemeCommand')
             ->will($this->returnValue($this->_selectThemeCommand));
-        $this->infoCommand = $this->getMockBuilder('Themeswitcher_InfoCommand')
+        $this->infoCommand = $this->getMockBuilder('Themeswitcher\InfoCommand')
             ->disableOriginalConstructor()->getMock();
         $commandFactory->expects($this->any())->method('makeInfoCommand')
             ->will($this->returnValue($this->infoCommand));
-        $this->subject = new Themeswitcher_Controller($commandFactory);
+        $this->subject = new Controller($commandFactory);
         $this->printPluginAdmin = new PHPUnit_Extensions_MockFunction(
             'print_plugin_admin', $this->subject
         );

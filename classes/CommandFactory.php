@@ -13,6 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
 /**
  * The command factory.
  *
@@ -22,40 +24,40 @@
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
-class Themeswitcher_CommandFactory
+class CommandFactory
 {
     /**
      * Makes a theme selection command.
      *
-     * @return Themeswitcher_ThemeSelectionCommand
+     * @return ThemeSelectionCommand
      */
     public function makeThemeSelectionCommand()
     {
-        return new Themeswitcher_ThemeSelectionCommand(
-            new Themeswitcher_Model()
+        return new ThemeSelectionCommand(
+            new Model()
         );
     }
 
     /**
      * Makes a select theme command.
      *
-     * @return Themeswitcher_SelectThemeCommand
+     * @return SelectThemeCommand
      */
     public function makeSelectThemeCommand()
     {
-        return new Themeswitcher_SelectThemeCommand(
-            new Themeswitcher_Model()
+        return new SelectThemeCommand(
+            new Model()
         );
     }
 
     /**
      * Makes an info command.
      *
-     * @return Themeswitcher_InfoCommand
+     * @return InfoCommand
      */
     public function makeInfoCommand()
     {
-        return new Themeswitcher_InfoCommand();
+        return new InfoCommand();
     }
 }
 

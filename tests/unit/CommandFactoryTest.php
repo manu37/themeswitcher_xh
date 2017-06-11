@@ -13,6 +13,10 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
+
 /**
  * Testing the command factory.
  *
@@ -27,7 +31,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_CommandFactory
+     * @var CommandFactory
      */
     protected $subject;
 
@@ -38,7 +42,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->subject = new Themeswitcher_CommandFactory();
+        $this->subject = new CommandFactory();
     }
 
     /**
@@ -49,7 +53,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     public function testMakeThemeSelectionCommand()
     {
         $this->assertInstanceOf(
-            'Themeswitcher_ThemeSelectionCommand',
+            'Themeswitcher\ThemeSelectionCommand',
             $this->subject->makeThemeSelectionCommand()
         );
     }
@@ -62,7 +66,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     public function testMakeSelectThemeCommand()
     {
         $this->assertInstanceOf(
-            'Themeswitcher_SelectThemeCommand',
+            'Themeswitcher\SelectThemeCommand',
             $this->subject->makeSelectThemeCommand()
         );
     }
@@ -75,7 +79,7 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     public function testMakeInfoCommand()
     {
         $this->assertInstanceOf(
-            'Themeswitcher_InfoCommand',
+            'Themeswitcher\InfoCommand',
             $this->subject->makeInfoCommand()
         );
     }

@@ -13,6 +13,10 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
+namespace Themeswitcher;
+
+use PHPUnit_Framework_TestCase;
+
 /**
  * Testing the info command.
  *
@@ -27,7 +31,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
     /**
      * The test subject.
      *
-     * @var Themeswitcher_InfoCommand
+     * @var InfoCommand
      */
     protected $subject;
 
@@ -43,7 +47,7 @@ class InfoCommandTest extends PHPUnit_Framework_TestCase
         } else {
             runkit_constant_redefine('THEMESWITCHER_VERSION', '1.0');
         }
-        $this->subject = new Themeswitcher_InfoCommand();
+        $this->subject = new InfoCommand();
     }
 
     /**
