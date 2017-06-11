@@ -5,5 +5,11 @@
             "exclude": ["tests", "vendor"],
             "name": "/\\.(php|htm)$/"
         }
+    ],
+    "plugins": [
+    ],
+    "analysers": [
+    ],
+    "services": [
     ]
 }
