@@ -49,7 +49,7 @@ class ThemeSelectionCommand
         if (!$run) {
             $bjs .= sprintf(
                 '<script type="text/javascript" src="%s"></script>',
-                "{$pth['folder']['plugins']}themeswitcher/themeswitcher.js"
+                "{$pth['folder']['plugins']}themeswitcher/themeswitcher.min.js"
             );
         }
         $run++;
