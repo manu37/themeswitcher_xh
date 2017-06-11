@@ -13,10 +13,6 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
-require_once '../../cmsimple/functions.php';
-require_once './classes/Model.php';
-require_once './classes/ThemeSelectionCommand.php';
-
 /**
  * Testing the theme selection command.
  *

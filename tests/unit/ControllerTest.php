@@ -13,10 +13,6 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
-require_once './vendor/autoload.php';
-require_once '../../cmsimple/adminfuncs.php';
-require_once './classes/Controller.php';
-
 /**
  * Testing the controller.
  *

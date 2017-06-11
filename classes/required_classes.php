@@ -14,12 +14,9 @@
  */
 
 spl_autoload_register(function ($className) {
-    global $pth;
-
     $parts = explode('_', $className);
     if ($parts[0] == 'Themeswitcher') {
-        include_once $pth['folder']['plugins'] . 'themeswitcher/classes/'
-            . $parts[1] . '.php';
+        include_once __DIR__ . '/' . $parts[1] . '.php';
     }
 });
 

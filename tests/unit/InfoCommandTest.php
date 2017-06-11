@@ -13,8 +13,6 @@
  * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
  */
 
-require_once './classes/InfoCommand.php';
-
 /**
  * Testing the info command.
  *
