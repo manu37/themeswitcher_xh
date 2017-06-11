@@ -1,7 +1,7 @@
 /*!
  * Themeswitcher_XH
  *
- * @copyright 2015 Christoph M. Becker <http://3-magi.net/>
+ * @copyright 2015-2017 Christoph M. Becker <http://3-magi.net/>
  * @license   GNU GPL <http://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
