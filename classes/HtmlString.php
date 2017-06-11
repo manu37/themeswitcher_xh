@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2014-2017 Christoph M. Becker
+ * Copyright 2017 Christoph M. Becker
  *
  * This file is part of Themeswitcher_XH.
  *
@@ -21,18 +21,26 @@
 
 namespace Themeswitcher;
 
-class InfoCommand
+class HtmlString
 {
+    /**
+     * @var string
+     */
+    private $value;
+
+    /**
+     * @param string $string
+     */
+    public function __construct($string)
+    {
+        $this->value = (string) $string;
+    }
+
     /**
      * @return string
      */
-    public function render()
+    public function __toString()
     {
-        global $pth;
-
-        $view = new View('info');
-        $view->logo = "{$pth['folder']['plugins']}themeswitcher/themeswitcher.png";
-        $view->version = THEMESWITCHER_VERSION;
-        return (string) $view;
+        return $this->value;
     }
 }

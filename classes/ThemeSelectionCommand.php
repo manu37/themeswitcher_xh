@@ -21,6 +21,8 @@
 
 namespace Themeswitcher;
 
+use stdClass;
+
 class ThemeSelectionCommand
 {
     /**
@@ -47,52 +49,25 @@ class ThemeSelectionCommand
         $run++;
         $bjs .= '<script type="text/javascript" src="' . $pth['folder']['plugins']
             . 'themeswitcher/themeswitcher.js"></script>';
-        return '<form class="themeswitcher_select_form" method="post">'
-            . '<label for="themeswitcher_' . $run . '">'
-            . $plugin_tx['themeswitcher']['label_theme'] . '</label>'
-            . $this->renderSelect($run)
-            . $this->renderSubmitButton()
-            . '</form>';
+        $view = new View('form');
+        $view->run = $run;
+        $view->themes = $this->getThemes();
+        return (string) $view;
     }
 
     /**
-     * @param int $run
-     * @return string
+     * @return stdClass[]
      */
-    private function renderSelect($run)
+    private function getThemes()
     {
-        $html = '<select id="themeswitcher_' . $run
-            . '" name="themeswitcher_select">';
-        foreach ($this->model->getThemes() as $theme) {
-            $html .= $this->renderOption($theme);
+        $themes = [];
+        foreach ($this->model->getThemes() as $name) {
+            $themes[] = (object) array(
+                'name' => $name,
+                'selected' => $name === $this->getCurrentTheme() ? 'selected' : ''
+            );
         }
-        $html .= '</select>';
-        return $html;
-    }
-
-    /**
-     * @param string $theme
-     * @return string
-     */
-    private function renderOption($theme)
-    {
-        $html = '<option value="' . XH_hsc($theme) . '"';
-        if ($theme == $this->getCurrentTheme()) {
-            $html .= ' selected="selected"';
-        }
-        $html .= '>' . XH_hsc($theme) . '</option>';
-        return $html;
-    }
-
-    /**
-     * @return string
-     */
-    private function renderSubmitButton()
-    {
-        global $plugin_tx;
-
-        return '<button>' . $plugin_tx['themeswitcher']['label_activate']
-            . '</button>';
+        return $themes;
     }
 
     /**
