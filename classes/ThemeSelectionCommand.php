@@ -43,7 +43,7 @@ class ThemeSelectionCommand
      */
     public function render()
     {
-        global $su, $pth, $bjs, $plugin_tx;
+        global $su, $pth, $bjs;
         static $run = 0;
 
         if (!$run) {
