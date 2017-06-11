@@ -50,9 +50,7 @@ class Controller
             $this->outputContents($this->renderThemeSelection());
         }
         if (XH_ADM) {
-            if (function_exists('XH_registerStandardPluginMenuItems')) {
-                XH_registerStandardPluginMenuItems(false);
-            }
+            XH_registerStandardPluginMenuItems(false);
             if ($this->isAdministrationRequested()) {
                 $this->handleAdministration();
             }
@@ -87,11 +85,7 @@ class Controller
      */
     private function isAdministrationRequested()
     {
-        global $themeswitcher;
-
-        return function_exists('XH_wantsPluginAdministration')
-            && XH_wantsPluginAdministration('themeswitcher')
-            || isset($themeswitcher) && $themeswitcher == 'true';
+        return XH_wantsPluginAdministration('themeswitcher');
     }
 
     /**
