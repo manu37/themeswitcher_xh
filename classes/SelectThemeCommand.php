@@ -83,9 +83,9 @@ class SelectThemeCommand
     private function getUserTheme()
     {
         if (isset($_POST['themeswitcher_select'])) {
-            return stsl($_POST['themeswitcher_select']);
+            return $_POST['themeswitcher_select'];
         } else {
-            return stsl($_COOKIE['themeswitcher_theme']);
+            return $_COOKIE['themeswitcher_theme'];
         }
     }
 

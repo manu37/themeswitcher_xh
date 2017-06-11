@@ -78,9 +78,9 @@ class ThemeSelectionCommand
         global $cf;
 
         if (isset($_POST['themeswitcher_select'])) {
-            return stsl($_POST['themeswitcher_select']);
+            return $_POST['themeswitcher_select'];
         } elseif (isset($_COOKIE['themeswitcher_theme'])) {
-            return stsl($_COOKIE['themeswitcher_theme']);
+            return $_COOKIE['themeswitcher_theme'];
         } else {
             return $cf['site']['template'];
         }
