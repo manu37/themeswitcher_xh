@@ -1,16 +1,22 @@
 <?php
 
 /**
- * Testing the select theme command.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  Testing
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
@@ -18,41 +24,24 @@ namespace Themeswitcher;
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Extensions_MockFunction;
 
-/**
- * Testing the select theme command.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The test subject.
-     *
      * @var SelectThemeCommand
      */
-    protected $subject;
+    private $subject;
 
     /**
-     * The model.
-     *
      * @var Model
      */
-    protected $model;
+    private $model;
 
     /**
-     * The setcookie mock.
-     *
      * @var PHPUnit_Extensions_MockFunction
      */
-    protected $setcookie;
+    private $setcookie;
 
     /**
-     * Sets up the test fixture.
-     *
      * @return void
      */
     public function setUp()
@@ -64,14 +53,10 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
         $this->model->expects($this->any())->method('getThemes')
             ->will($this->returnValue(array('one', 'three', 'two')));
         $this->subject = new SelectThemeCommand($this->model);
-        $this->setcookie = new PHPUnit_Extensions_MockFunction(
-            'setcookie', $this->subject
-        );
+        $this->setcookie = new PHPUnit_Extensions_MockFunction('setcookie', $this->subject);
     }
 
     /**
-     * Tests that the theme is switched on the appropriate GET request.
-     *
      * @return void
      */
     public function testSwitchesThemeOnGet()
@@ -83,8 +68,6 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the theme is switched on the appropriate cookie.
-     *
      * @return void
      */
     public function testSwitchesThemeOnCookie()
@@ -96,9 +79,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the theme is not switched if not allowed.
-     *
-     * @return void.
+     * @return void
      */
     public function testDontSwitchThemeIfNotAllowed()
     {
@@ -108,12 +89,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the theme is switched if page themes are not preferred.
-     *
      * @return void
-     *
-     * @global array The page data of the selected page.
-     * @global array The configuration of the plugins.
      */
     public function testSwitchThemeIfPageThemeIsNotPreferred()
     {
@@ -127,12 +103,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the theme is not switched if page themes are preferred.
-     *
      * @return void
-     *
-     * @global array The page data of the selected page.
-     * @global array The configuration of the plugins.
      */
     public function testDontSwitchThemeIfPageTemplateIsPreferred()
     {
@@ -146,22 +117,16 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the cookie is set on the appropriate GET request.
-     *
      * @return void
      */
     public function testCookieIsSetOnGet()
     {
         $_POST = array('themeswitcher_select' => 'one');
-        $this->setcookie->expects($this->once())->with(
-            'themeswitcher_theme', 'one', 0, CMSIMPLE_ROOT
-        );
+        $this->setcookie->expects($this->once())->with('themeswitcher_theme', 'one', 0, CMSIMPLE_ROOT);
         $this->subject->execute();
     }
 
     /**
-     * Tests that no cookie is set on the appropriate cookie.
-     *
      * @return void
      */
     public function testNoCookieIsSetOnCookie()
@@ -171,5 +136,3 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
         $this->subject->execute();
     }
 }
-
-?>

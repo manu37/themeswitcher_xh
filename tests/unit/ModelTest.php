@@ -1,16 +1,22 @@
 <?php
 
 /**
- * Testing the themeswitcher model.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  Testing
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
@@ -20,37 +26,20 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStream;
 
-/**
- * Testing the themeswitcher model.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class ModelTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The test subject.
-     *
      * @var Model
      */
-    protected $subject;
+    private $subject;
 
     /**
-     * The paths of the theme folder.
-     *
      * @var string
      */
-    protected $themeFolder;
+    private $themeFolder;
 
     /**
-     * Sets up the test fixture.
-     *
      * @return void
-     *
-     * @global array The paths of system files and folders.
      */
     public function setUp()
     {
@@ -68,8 +57,6 @@ class ModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that expected themes are returned.
-     *
      * @return void
      */
     public function testGetThemes()
@@ -81,11 +68,7 @@ class ModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that switch theme switches the theme.
-     *
      * @return void
-     *
-     * @global array The paths of system files and folders.
      */
     public function testSwitchTheme()
     {
@@ -109,6 +92,3 @@ class ModelTest extends PHPUnit_Framework_TestCase
         );
     }
 }
-
-
-?>

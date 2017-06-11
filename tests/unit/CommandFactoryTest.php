@@ -1,43 +1,36 @@
 <?php
 
 /**
- * Testing the command factory.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  Testing
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
 
 use PHPUnit_Framework_TestCase;
 
-/**
- * Testing the command factory.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class CommandFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The test subject.
-     *
      * @var CommandFactory
      */
-    protected $subject;
+    private $subject;
 
     /**
-     * Sets up the test fixtures.
-     *
      * @return void
      */
     public function setUp()
@@ -46,8 +39,6 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests making a theme selection command.
-     *
      * @return void
      */
     public function testMakeThemeSelectionCommand()
@@ -59,8 +50,6 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests making a select theme command.
-     *
      * @return void
      */
     public function testMakeSelectThemeCommand()
@@ -72,8 +61,6 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests making an info command.
-     *
      * @return void
      */
     public function testMakeInfoCommand()
@@ -84,5 +71,3 @@ class CommandFactoryTest extends PHPUnit_Framework_TestCase
         );
     }
 }
-
-?>

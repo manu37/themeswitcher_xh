@@ -1,16 +1,22 @@
 <?php
 
 /**
- * Testing the controller.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  Testing
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
@@ -18,48 +24,29 @@ namespace Themeswitcher;
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Extensions_MockFunction;
 
-/**
- * Testing the controller.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class ControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The test subject.
-     *
      * @var Controller
      */
-    protected $subject;
+    private $subject;
 
     /**
-     * The theme selection command.
-     *
      * @var SelectionCommand
      */
-    protected $themeSelectionCommand;
+    private $themeSelectionCommand;
 
     /**
-     * The info command.
-     *
      * @var InfoCommand
      */
-    protected $infoCommand;
+    private $infoCommand;
 
     /**
-     * The print_plugin_admin() mock.
-     *
      * @var PHPUnit_Extensions_MockFunction
      */
-    protected $printPluginAdmin;
+    private $printPluginAdmin;
 
     /**
-     * Sets up the test fixture.
-     *
      * @return void
      */
     public function setUp()
@@ -89,17 +76,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $commandFactory->expects($this->any())->method('makeInfoCommand')
             ->will($this->returnValue($this->infoCommand));
         $this->subject = new Controller($commandFactory);
-        $this->printPluginAdmin = new PHPUnit_Extensions_MockFunction(
-            'print_plugin_admin', $this->subject
-        );
-        new PHPUnit_Extensions_MockFunction(
-            'XH_registerStandardPluginMenuItems', $this->subject
-        );
+        $this->printPluginAdmin = new PHPUnit_Extensions_MockFunction('print_plugin_admin', $this->subject);
+        new PHPUnit_Extensions_MockFunction('XH_registerStandardPluginMenuItems', $this->subject);
     }
 
     /**
-     * Tests that a select theme command is executed on an appropriate GET request.
-     *
      * @return void
      */
     public function testExecutesSelectThemeCommandOnGet()
@@ -110,8 +91,6 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that a select theme command is executed on an appropriate COOKIE.
-     *
      * @return void
      */
     public function testExecutesSelectThemeCommandOnCookie()
@@ -122,12 +101,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the info command is rendered.
-     *
      * @return void
-     *
-     * @global string Whether the plugin is requested.
-     * @global string The value of <var>admin</var> GP paramter.
      */
     public function testRendersInfoCommand()
     {
@@ -141,13 +115,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that plugin_admin_common() is called.
-     *
      * @return void
-     *
-     * @global string Whether the plugin is requested.
-     * @global string The value of the <var>admin</var> GP paramter.
-     * @global string The value of the <var>action</var> GP parameter.
      */
     public function testPluginAdminCommon()
     {
@@ -157,26 +125,17 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $admin = 'plugin_config';
         $action = 'plugin_edit';
         $this->printPluginAdmin->expects($this->once());
-        $pluginAdminCommon = new PHPUnit_Extensions_MockFunction(
-            'plugin_admin_common', $this->subject
-        );
-        $pluginAdminCommon->expects($this->once())->with(
-            $action, $admin, 'themeswitcher'
-        );
+        $pluginAdminCommon = new PHPUnit_Extensions_MockFunction('plugin_admin_common', $this->subject);
+        $pluginAdminCommon->expects($this->once())->with($action, $admin, 'themeswitcher');
         $this->subject->dispatch();
     }
 
     /**
-     * Tests the theme selection.
-     *
      * @return void
      */
     public function testThemeSelection()
     {
         $this->themeSelectionCommand->expects($this->once())->method('render');
         $this->subject->renderThemeSelection();
-
     }
 }
-
-?>

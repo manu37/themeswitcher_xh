@@ -1,48 +1,37 @@
 <?php
 
 /**
- * Testing the theme selection command.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  Testing
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
 
 use PHPUnit_Framework_TestCase;
 
-/**
- * Testing the theme selection command.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * The test subject.
-     *
      * @var ThemeSelectionCommand
      */
-    protected $subject;
+    private $subject;
 
     /**
-     * Sets up the test fixture.
-     *
      * @return void
-     *
-     * @global string The script name.
-     * @global string The selected URL.
-     * @global array  The localization of the plugins.
      */
     public function setUp()
     {
@@ -61,11 +50,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the form is rendered.
-     *
      * @return void
-     *
-     * @global string The script name.
      */
     public function testRendersForm()
     {
@@ -82,8 +67,6 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the select element is rendered.
-     *
      * @return void
      */
     public function testRendersSelect()
@@ -103,8 +86,6 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the "two" option is rendered.
-     *
      * @return void
      */
     public function testRendersTwoOption()
@@ -121,11 +102,7 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests that the submit button is rendered.
-     *
      * @return void
-     *
-     * @global array The localization of the plugins.
      */
     public function testRendersSubmitButton()
     {
@@ -140,16 +117,10 @@ class ThemeSelectionCommandTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Asserts that rendering matches a matcher.
-     *
-     * @param array $matcher A matcher.
-     *
      * @return void
      */
-    protected function assertRenders($matcher)
+    private function assertRenders(array $matcher)
     {
         @$this->assertTag($matcher, $this->subject->render());
     }
 }
-
-?>

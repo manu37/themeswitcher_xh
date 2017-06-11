@@ -1,43 +1,34 @@
 <?php
 
 /**
- * The select theme command.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  CMSimple_XH
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
 
-/**
- * The select theme command.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class SelectThemeCommand
 {
     /**
-     * The model.
-     *
      * @var Model
      */
-    protected $model;
+    private $model;
 
     /**
-     * Initializes a new instance.
-     *
-     * @param Model $model A model.
-     *
      * @return void
      */
     public function __construct(Model $model)
@@ -46,8 +37,6 @@ class SelectThemeCommand
     }
 
     /**
-     * Executes the command.
-     *
      * @return void
      */
     public function execute()
@@ -61,23 +50,17 @@ class SelectThemeCommand
     }
 
     /**
-     * Returns whether the user selected theme is allowed.
-     *
      * @return bool
      */
-    protected function isUserThemeAllowed()
+    private function isUserThemeAllowed()
     {
         return in_array($this->getUserTheme(), $this->model->getThemes());
     }
 
     /**
-     * Returns hether the selected page has an individual theme.
-     *
      * @return bool
-     *
-     * @global array The page data of the selected page.
      */
-    protected function hasPageTheme()
+    private function hasPageTheme()
     {
         global $pd_current;
 
@@ -85,13 +68,9 @@ class SelectThemeCommand
     }
 
     /**
-     * Returns whether individual page themes are preferred.
-     *
      * @return bool
-     *
-     * @global array The configuration of the plugins.
      */
-    protected function isPageThemePreferred()
+    private function isPageThemePreferred()
     {
         global $plugin_cf;
 
@@ -99,11 +78,9 @@ class SelectThemeCommand
     }
 
     /**
-     * Returns the theme selected by the user.
-     *
      * @return string
      */
-    protected function getUserTheme()
+    private function getUserTheme()
     {
         if (isset($_POST['themeswitcher_select'])) {
             return stsl($_POST['themeswitcher_select']);
@@ -113,19 +90,12 @@ class SelectThemeCommand
     }
 
     /**
-     * Sets the theme cookie if necessary.
-     *
      * @return void
      */
-    protected function setThemeCookie()
+    private function setThemeCookie()
     {
         if (isset($_POST['themeswitcher_select'])) {
-            setcookie(
-                'themeswitcher_theme', $this->getUserTheme(),
-                0, CMSIMPLE_ROOT
-            );
+            setcookie('themeswitcher_theme', $this->getUserTheme(), 0, CMSIMPLE_ROOT);
         }
     }
 }
-
-?>

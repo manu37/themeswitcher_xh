@@ -1,43 +1,34 @@
 <?php
 
 /**
- * The controller.
+ * Copyright (C) 2014-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Themeswitcher_XH.
  *
- * @category  CMSimple_XH
- * @package   Themeswitcher
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2014-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
+ * Themeswitcher_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Themeswitcher_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Themeswitcher_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Themeswitcher;
 
-/**
- * The controller.
- *
- * @category CMSimple_XH
- * @package  Themeswitcher
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Themeswitcher_XH
- */
 class Controller
 {
     /**
-     * The command factory.
-     *
-     * @var CommandFactory.
+     * @var CommandFactory
      */
-    protected $commandFactory;
+    private $commandFactory;
 
     /**
-     * Initializes a new instance.
-     *
-     * @param CommandFactory $commandFactory A command factory.
-     *
      * @return void
      */
     public function __construct(CommandFactory $commandFactory)
@@ -46,8 +37,6 @@ class Controller
     }
 
     /**
-     * Dispatches according to the request.
-     *
      * @return void
      */
     public function dispatch()
@@ -71,15 +60,9 @@ class Controller
     }
 
     /**
-     * Whether the theme selection is displayed automatically.
-     *
      * @return bool
-     *
-     * @global bool  Whether the print view is requested.
-     * @global bool  Whether we're in edit mode.
-     * @global array The configuration of the plugins.
      */
-    protected function isAutomatic()
+    private function isAutomatic()
     {
         global $print, $edit, $plugin_cf;
 
@@ -89,15 +72,10 @@ class Controller
     }
 
     /**
-     * Outputs (X)HTML to the contents area.
-     *
-     * @param string $html Some (X)HTML.
-     *
+     * @param string $html
      * @return void
-     *     *
-     * @global string The (X)HTML of the contents area.
      */
-    protected function outputContents($html)
+    private function outputContents($html)
     {
         global $o;
 
@@ -105,13 +83,9 @@ class Controller
     }
 
     /**
-     * Whether the plugin administration is requested.
-     *
      * @return bool
-     *
-     * @global string Whether the plugin is requested.
      */
-    protected function isAdministrationRequested()
+    private function isAdministrationRequested()
     {
         global $themeswitcher;
 
@@ -121,37 +95,27 @@ class Controller
     }
 
     /**
-     * Handles the plugin administration.
-     *
      * @return void
-     *
-     * @global string The value of the <var>admin</var> GP parameter.
-     * @global string The value of the <var>action</var> GP parameter.
-     * @global string The output for the content area.
      */
-    protected function handleAdministration()
+    private function handleAdministration()
     {
         global $admin, $action, $o;
 
         $o .= print_plugin_admin('off');
         switch ($admin) {
-        case '':
-            $o .= $this->commandFactory->makeInfoCommand()->render();
-            break;
-        default:
-            $o .= plugin_admin_common($action, $admin, 'themeswitcher');
+            case '':
+                $o .= $this->commandFactory->makeInfoCommand()->render();
+                break;
+            default:
+                $o .= plugin_admin_common($action, $admin, 'themeswitcher');
         }
     }
 
     /**
-     * Renders the theme selection.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
     public function renderThemeSelection()
     {
         return $this->commandFactory->makeThemeSelectionCommand()->render();
     }
 }
-
-?>
