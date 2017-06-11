@@ -46,9 +46,13 @@ class ThemeSelectionCommand
         global $su, $pth, $bjs, $plugin_tx;
         static $run = 0;
 
+        if (!$run) {
+            $bjs .= sprintf(
+                '<script type="text/javascript" src="%s"></script>',
+                "{$pth['folder']['plugins']}themeswitcher/themeswitcher.js"
+            );
+        }
         $run++;
-        $bjs .= '<script type="text/javascript" src="' . $pth['folder']['plugins']
-            . 'themeswitcher/themeswitcher.js"></script>';
         $view = new View('form');
         $view->run = $run;
         $view->selected = $su;
