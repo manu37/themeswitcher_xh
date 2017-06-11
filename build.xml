@@ -92,6 +92,7 @@
                 <exclude name="build.xml"/>
                 <exclude name="composer.*"/>
                 <exclude name="coverage.xml"/>
+                <exclude name="README.md"/>
                 <exclude name="phpcompatinfo.json"/>
             </fileset>
         </move>
