@@ -49,7 +49,7 @@ class SelectThemeCommandTest extends PHPUnit_Framework_TestCase
         if (!defined('CMSIMPLE_ROOT')) {
             define('CMSIMPLE_ROOT', '/');
         }
-        $this->model = $this->getMock('Themeswitcher\Model');
+        $this->model = $this->createMock('Themeswitcher\Model');
         $this->model->expects($this->any())->method('getThemes')
             ->will($this->returnValue(array('one', 'three', 'two')));
         $this->subject = new SelectThemeCommand($this->model);

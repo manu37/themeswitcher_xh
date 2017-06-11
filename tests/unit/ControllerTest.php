@@ -56,23 +56,16 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         } else {
             runkit_constant_redefine('XH_ADM', true);
         }
-        $commandFactory = $this->getMock('Themeswitcher\CommandFactory');
-        $this->themeSelectionCommand = $this
-            ->getMockBuilder('Themeswitcher\ThemeSelectionCommand')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $commandFactory = $this->createMock('Themeswitcher\CommandFactory');
+        $this->themeSelectionCommand = $this->createMock('Themeswitcher\ThemeSelectionCommand');
         $commandFactory->expects($this->any())
             ->method('makeThemeSelectionCommand')
             ->will($this->returnValue($this->themeSelectionCommand));
-        $this->_selectThemeCommand = $this
-            ->getMockBuilder('Themeswitcher\SelectThemeCommand')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->_selectThemeCommand = $this->createMock('Themeswitcher\SelectThemeCommand');
         $commandFactory->expects($this->any())
             ->method('makeSelectThemeCommand')
             ->will($this->returnValue($this->_selectThemeCommand));
-        $this->infoCommand = $this->getMockBuilder('Themeswitcher\InfoCommand')
-            ->disableOriginalConstructor()->getMock();
+        $this->infoCommand = $this->createMock('Themeswitcher\InfoCommand');
         $commandFactory->expects($this->any())->method('makeInfoCommand')
             ->will($this->returnValue($this->infoCommand));
         $this->subject = new Controller($commandFactory);
