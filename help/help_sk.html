@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"><title>Themeswitcher_XH – User Manual</title>
+
+<link rel="stylesheet" type="text/css" href="./stylesheet.css"></head><body>
+
+<article>
+</article><h1>Themeswitcher_XH – Návod na použitie<br>
+</h1>
+<img src="../themeswitcher.png" style="margin: 0pt 1.5em 0.5em 0pt; float: left;" alt="Stylized Themes">
+<p> Themeswitcher_XH umožňuje zobraziť pre návštevníkov stránky
+výberové okienkonpre výber šablóny (template) pre konkrétnu stránku. Je
+to užitočné v prípade demonštračných stránok, ale aj v prípade bežných
+stránok, najmä ak v šablóne používate špecifické funkcie.
+</p>
+
+<nav id="nav">
+</nav><h2>Obsah</h2>
+<ul>
+<li><a href="#notice">Dôležité upozornenie<br>
+</a></li>
+<li><a href="#requirements">Požiadavky</a></li>
+<li><a href="#installation">Inštalácia</a></li>
+<li><a href="#settings">Nastavenie</a></li>
+<li><a href="#usage">Použitie</a></li>
+<li><a href="#limitations">Obmedzenia</a></li>
+<li><a href="#license">Licencia</a></li>
+<li><a href="#credits">Záruky</a></li>
+</ul>
+
+
+<section id="notice">
+</section><h2>Dôležité upozornenie<br>
+</h2>
+<p class="important">
+    Themeswitcher_XH nemohol byť otestovaná vo všetkých prostrediach. Je to tzv. beta verzia. Používajte uvážlivo!
+</p>
+
+
+<section id="requirements">
+</section><h2>Požiadavky</h2>
+<p>
+    Themeswitcher_XH je plugin pre CMSimple_XH ≥ 1.6.3. Vyžaduje PHP ≥
+    5.4.0.
+</p><section id="installation"></section><ol></ol>
+<h2>Inštalácia</h2>
+
+<p>
+    Inštalácia prebieha rovnako ako pri väčšine CMSimple_XH pluginov.
+    Viac na <a href="http://www.cmsimple-xh.org/wiki/doku.php/installation">
+    CMSimple_XH wiki</a>.
+</p>
+
+<ol>
+<li class="important">
+    Urobte najprv zálohu dát na Vašom serveri.
+</li><li>
+    Rozbaľte archív vo Vašom počítači.
+</li><li>
+    Uložte celý adresár themeswitcher/ na Váš server do adresára /plugins.
+</li><li>
+    Nastavte prístupové práva pre podadresáre cache/, config/, css/ a languages/.
+</li>
+</ol>
+<ol>
+<!--
+<li>
+    Browse to Themeswitcher's administration (Plugins &rarr; Themeswitcher),
+    and check if all requirements are fulfilled.
+</li>
+-->
+</ol>
+
+
+
+<section id="settings">
+</section>
+<h2>Nastavenie</h2>
+
+<p>
+	Nastavenie pluginu sa robí rovnako ako pri iných pluginoch CMSimple_XH v správcovskom prostredí stránky. Otvorte <em>Plugins</em>→<em>Themeswitcher</em>.
+</p>
+
+<p>
+	Zmeny nastavení môžete urobiť v Themeswitcher_XH v <em>Config</em>. Vysvetlivky sa zobrazia prechodom na ikonu pomocníka..
+</p>
+
+<p>
+	Jazykové prostredie si aktuaizujete prekladom položiek v <em>Language</em>. Formulácie môžete prepísať do Vášho jazyka, ak tento nie je v archíve, alebo ich môžete upraviť podľa Vašich potrieb.
+</p>
+
+<p>
+	Vzhľad Themeswitcher_XH môžete upraviť pod <em>Stylesheet</em>.
+</p>
+<section id="usage"></section><h2>Použitie</h2>
+<p>Theme switcher môžete vložiť priamo do Vašľej šablóny:
+</p>
+<pre>&lt;?=themeswitcher()?&gt;</pre>
+<p>alebo na jednotlivé stránky:
+</p>
+<pre>{{{themeswitcher()}}}</pre>
+<p>To umožňuje návštevníkom stránky vybrať si vyhovujúci šablónu. Táto
+voľba sa ukladá do cookies, takže zvolená šablóna ostáva aktívna počas
+celej doby surfovania. Môžete nastaviť, čo výber šabl=ony prepíše
+základné nastavenia (definované v <i>page_params</i>).
+</p>
+<p>AK máte na výber veľa šablón a chcete mať voľbu šablón viditeľnú na
+každej stránke, môžete to nastaviť v konfigurácii. V takom prípade sa
+výberové okno zobrazí na hornom okraji stránky, napr. nad hlavičkou
+stránky.
+</p>
+<p>Nie je však nevyhnutné výberové okienko zobrazovať vôbec.&nbsp;
+Namiesto toho môžete na stránku umietniť odkazy obsahujúce aj názov
+šablóny. Pre správny tvar takéhoto odkazu využite výberové okno.
+</p>
+
+
+<section id="limitations">
+</section><h2>Obmedzenia</h2>
+<p>Od verzie CMSimple_XH 1.6 sú špecifické šablóny platné aj pre podstránky, pokiaľ nie sú inak definované. Toto však nezabezpečuje
+    Themeswitcher_XH.
+</p>
+
+
+<section id="license">
+</section><h2>Licencia</h2>
+<p>Na Themeswitcher_XH sa vzťahuje licencia <a href="http://www.gnu.org/licenses/gpl.html">GPLv3</a>.
+</p>
+<p>
+    Copyright © 2014-2017 Christoph M. Becker
+</p>
+<ins>
+<p>
+    Slovak translation © 2017 Dr. Martin Sereday
+</p>
+</ins>
+
+<section id="credits">
+</section><h2>Záruky</h2>
+<p>
+    Themeswitcher_XH je inšpirovaný skriptom <a href="http://cmsimplewiki.com/doku.php/plugins/templateshift">Templateshift</a> od olape a xhomie.
+</p>
+<p>Logo pluginu navrhol <a href="https://code.google.com/u/newmooon/">newmooon</a>. Ďakujem za umožnenie používať ho v zmysle licencie MIT..
+</p>
+<p>
+    Ďakujem celej komunite <a href="http://www.cmsimpleforum.com/">CMSimple_XH forum</a> za návrhy,
+    rady a testovanie. Osobitne ďakujem frase a lck za testovanie a postrehy v začiatkoch.
+</p>
+
+<p>
+    Nakoniec, nemenej, veľka patrí <a href="http://harteg.dk/">Petrovi
+    Hartegovi</a>, otcovi CMSimple a všetkým vývojárom <a href="http://www.cmsimple-xh.org/">CMSimple_XH</a>, bez pomoci ktorých by tento skvelý CMSimple_XH nikdy neexistoval.
+</p>
+</body></html>
