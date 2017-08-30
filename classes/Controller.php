@@ -75,9 +75,12 @@ class Controller
      */
     private function outputContents($html)
     {
-        global $o;
+        global $c, $o, $pd_s, $s;
 
-        $o .= $html;
+        if ( XH_ADM || $s > -1)
+            $o .= $html;
+        else
+            $c[$pd_s] = $html . $c[$pd_s];
     }
 
     /**
