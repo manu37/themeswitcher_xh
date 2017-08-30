@@ -22,10 +22,8 @@
 /*
  * Prevent direct access and usage from unsupported CMSimple_XH versions.
  */
-if (!defined('CMSIMPLE_XH_VERSION')
-    || strpos(CMSIMPLE_XH_VERSION, 'CMSimple_XH') !== 0
-    || version_compare(CMSIMPLE_XH_VERSION, 'CMSimple_XH 1.6', 'lt')
-) {
+if (!class_exists('XH_CSRFProtection')) // version from 1.6.x
+{
     header('HTTP/1.1 403 Forbidden');
     header('Content-Type: text/plain; charset=UTF-8');
     die(<<<EOT
